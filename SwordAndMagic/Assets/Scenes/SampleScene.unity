@@ -206,7 +206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &144889111
 RectTransform:
   m_ObjectHideFlags: 0
@@ -477,6 +477,10 @@ MonoBehaviour:
   speed: 4
   pad: {fileID: 144889111}
   stick: {fileID: 157091839}
+  temp:
+  - 0
+  - 0
+  - 0
 --- !u!114 &1437176540
 MonoBehaviour:
   m_ObjectHideFlags: 0

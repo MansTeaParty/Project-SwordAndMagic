@@ -21,6 +21,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler,
     public RectTransform pad;   //패드와 스틱의 위치정보
     public RectTransform stick;
 
+    public float[] temp = new float[3];
     public void OnDrag(PointerEventData eventData)
     {
         stick.position = eventData.position;
@@ -28,6 +29,10 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler,
         stick.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, (pad.rect.width * 0.5f)-(stick.rect.width*0.5f));
 
         move = new Vector2(stick.localPosition.x,stick.localPosition.y).normalized;
+
+        temp[0] = move.x;
+        temp[1] = move.y;
+        temp[2] = move.z;
     }
 
     public void OnPointerDown(PointerEventData eventData)
