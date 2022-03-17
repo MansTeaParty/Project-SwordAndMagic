@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     {
         print("스폰 가능");
         print("스폰 메시지 전달");
-        Spawner.SendMessage("SpawnCheck", StageNum);
+        Spawner.SendMessage("SpawnCheck");
         isSpawnAble = false;
 
         yield return new WaitForSeconds(10.0f);
