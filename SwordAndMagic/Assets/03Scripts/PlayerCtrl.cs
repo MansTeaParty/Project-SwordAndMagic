@@ -1,21 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SYMath;
+//using SYMath;
 
 public class PlayerCtrl : MonoBehaviour
 {
     //GetInput
-    public int h = 0;
-    public int v = 0;
-    public bool wDown;
-    public bool aDown;
-    public bool sDown;
-    public bool dDown;
-    public bool wUp;
-    public bool aUp;
-    public bool sUp;
-    public bool dUp;
+    private int h = 0;
+    private int v = 0;
+    private bool wDown;
+    private bool aDown;
+    private bool sDown;
+    private bool dDown;
+    private bool wUp;
+    private bool aUp;
+    private bool sUp;
+    private bool dUp;
 
     //Move&Turn
     private Transform tr;
@@ -28,6 +28,9 @@ public class PlayerCtrl : MonoBehaviour
     //Anim
     public Animator anim;
 
+    //BaseAttack
+    public GameObject curBaseAttack;
+
 
     //public GameManager gameManager;
 
@@ -36,6 +39,8 @@ public class PlayerCtrl : MonoBehaviour
         tr = GetComponent<Transform>();
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+
+        StartCoroutine("BaseAttack");
     }
 
     // Start is called before the first frame update
@@ -68,7 +73,7 @@ public class PlayerCtrl : MonoBehaviour
         dUp = Input.GetKeyUp(KeyCode.D);
 
     }
-
+    #region Movement
     void Move()
     {
         
@@ -85,27 +90,37 @@ public class PlayerCtrl : MonoBehaviour
         if (sDown) anim.SetTrigger("S");
         if (dDown) anim.SetTrigger("D");
 
-        //if (moveVec.magnitude > 0)
+        ////if (moveVec.magnitude > 0)
+        ////{
+        ////    anim.SetFloat("Speed", 1.0f);
+        ////}
+        ////else
+        ////{
+        ////    anim.SetFloat("Speed", 0.0f);
+        ////}
+
+
+        //if (tr.position != currPos)
         //{
         //    anim.SetFloat("Speed", 1.0f);
+        //    Vector3.Lerp(tr.position, currPos, Time.deltaTime * 10.0f);
         //}
         //else
         //{
         //    anim.SetFloat("Speed", 0.0f);
         //}
-
-
-        if (tr.position != currPos)
-        {
-            anim.SetFloat("Speed", 1.0f);
-            Vector3.Lerp(tr.position, currPos, Time.deltaTime * 10.0f);
-        }
-        else
-        {
-            anim.SetFloat("Speed", 0.0f);
-        }
         
     }
 
+    #endregion
+
+    IEnumerator BaseAttack()
+    {
+        while (true)
+        {
+            Instantiate(curBaseAttack, tr/*, 회전값*/);//현재는 플레이어를 부모로 두기에 플레이어를 따라다님
+            yield return new WaitForSeconds(4f);
+        }
+    }
 
 }
