@@ -56,7 +56,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         GetInput();
         Move();
-        Turn();
+        //Turn();   //¹Ì±¸Çö
     }
 
     void GetInput()
@@ -91,24 +91,23 @@ public class PlayerCtrl : MonoBehaviour
         if (sDown) anim.SetTrigger("S");
         if (dDown) anim.SetTrigger("D");
 
-        ////if (moveVec.magnitude > 0)
-        ////{
-        ////    anim.SetFloat("Speed", 1.0f);
-        ////}
-        ////else
-        ////{
-        ////    anim.SetFloat("Speed", 0.0f);
-        ////}
-
-
-        //if (tr.position != currPos)
+        
+        //if (movevec.magnitude > 0)
         //{
-        //    anim.SetFloat("Speed", 1.0f);
-        //    Vector3.Lerp(tr.position, currPos, Time.deltaTime * 10.0f);
+        //    anim.setfloat("speed", 1.0f);
         //}
         //else
         //{
-        //    anim.SetFloat("Speed", 0.0f);
+        //    anim.setfloat("speed", 0.0f);
+        //}
+        //if (tr.position != currpos)
+        //{
+        //    anim.setfloat("speed", 1.0f);
+        //    vector3.lerp(tr.position, currpos, time.deltatime * 10.0f);
+        //}
+        //else
+        //{
+        //    anim.setfloat("speed", 0.0f);
         //}
         
     }
