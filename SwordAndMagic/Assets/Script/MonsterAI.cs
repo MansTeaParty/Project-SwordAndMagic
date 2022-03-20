@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MonsterAI : MonoBehaviour
 {
+    private GameObject MonsterManager;
     //추적할 타깃 변수
     public GameObject TraceTarget;
     //추적할 속도

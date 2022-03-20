@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5559218498689785170}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeLineController: {fileID: 0}
+  SelectingTimeLine: {fileID: 0}
   setTime: 180
   SetSpawnPoolTime: 30

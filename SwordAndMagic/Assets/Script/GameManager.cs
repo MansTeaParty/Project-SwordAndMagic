@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     //public GameObject[] TargetSpawners;
-    public GameObject TimeLineController;
+    public GameObject TimeLineController;//타임라인 컨트롤러
+    public GameObject SelectingTimeLine; //선택된 타임라인
 
     private bool isSpawnAble;
 
@@ -31,6 +32,10 @@ public class GameManager : MonoBehaviour
         waveCount = 1;
 
         TimeLineController = GameObject.FindGameObjectWithTag("TimeLineController");
+        //타임라인 컨트롤러에게 타임라인을 선택할 것을 지시
+        //그러면 타임라인 컨트롤러가 SelectTimeLine함수에서 타임라인을 선택하고
+        // 다시 sendMessage로 선택된 타임라인을 알려줌.
+        // 받은 타임라인 정보를 SelectingTimeLine에 저장
         TimeLineController.SendMessage("SelectTimeLine");
 
         isSpawnAble = true;
@@ -40,63 +45,32 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         TimeCal();
-
-        /*if (isSpawnAble == true)
-        {
-            //MonsterPoolController = GameObject.FindGameObjectWithTag("MonsterPool");
-            for (int i = 0; i < 1; i++)
-            {
-                StartCoroutine(SendNextPool());
-            }
-        }*/
-
     }
 
     void TimeCal()
     {
         //currentTime을 시간에 따라 + 시킴
         currentTime += Time.deltaTime;
-        Debug.Log("currentTime : " + (int)currentTime);
+        Debug.Log("현재 시간 : " + (int)currentTime);
 
-        if ((int)currentTime % SetSpawnPoolTime == 0) //몇 배수일 때 -> SetSpawnPoolTime초 마다
-        { 
+        //몇 배수일 때 -> SetSpawnPoolTime초 마다
+        if ((int)currentTime % SetSpawnPoolTime == 0)
+        {
             for (int i = 0; i < 1; i++)
             {
-                Debug.Log(SetSpawnPoolTime + ":초 지남");
-
-                TimeLineController.SendMessage("NextPool");
+                Debug.Log(SetSpawnPoolTime + "초 지남");
+                Debug.Log("다음 몬스터 풀 생성");
+                //TimeLine.cs의 NextPool 함수
+                SelectingTimeLine.SendMessage("NextPool");
             }
-
-
-
-            /*if (isSpawnAble)
-            {
-                for (int i = 0; i < 1; i++)
-                {
-                    StartCoroutine(SendNextPool());
-                }
-            }*/
         }
-
-    }
-
-    void SendStageNum()
-    { 
-    
     }
 
 
-    //TimeLineA 또는 TimeLineB에게 다음 몬스터 풀로 변경해라고 메시지 전달하는 역할
-    /*
-    IEnumerator SendNextPool(waveCount)
+    //타임라인 컨트롤러가 호출하여 정해진 타임라인이 무엇인지 받아옴. 
+    void RecieveTimeLine(GameObject timeline)
     {
-        print("다음 몬스터 풀로 변경!");
-        //TimeLineController.SendMessage("MonsterPool");
-        //MonsterPoolController.SendMessage("SpawnCheck");
-
-        isSpawnAble = false;
-
-        yield return new WaitForSeconds(3.0f);
-        isSpawnAble = true;
-    }*/
+        SelectingTimeLine = timeline;
+        Debug.Log("SelectingTimeLine: " + SelectingTimeLine);
+    }
 }

@@ -22,8 +22,11 @@ public class MonsterPoolCtrl : MonoBehaviour
 
     private int Stage_num;
 
+    private GameObject MonsterManager;
+
     void Start()
-    { 
+    {
+        MonsterManager = GameObject.FindGameObjectWithTag("MonsterManager");
         SpawnApprove = true;
     }
 
@@ -71,17 +74,20 @@ public class MonsterPoolCtrl : MonoBehaviour
         {
             for (int i = 0; i < SpawnValue_A; i++)
             {
-                Instantiate(Monster_A, GetRandomPosition(), Quaternion.identity);
+                GameObject Mons_A = Instantiate(Monster_A, GetRandomPosition(), Quaternion.identity);
+                Mons_A.transform.SetParent(MonsterManager.transform, false);
                 yield return new WaitForSeconds(1f);
             }
             for (int i = 0; i < SpawnValue_B; i++)
             {
-                Instantiate(Monster_B, GetRandomPosition(), Quaternion.identity);
+                GameObject Mons_B = Instantiate(Monster_B, GetRandomPosition(), Quaternion.identity);
+                Mons_B.transform.SetParent(MonsterManager.transform, false);
                 yield return new WaitForSeconds(1f);
             }
             for (int i = 0; i < SpawnValue_C; i++)
             {
-                Instantiate(Monster_C, GetRandomPosition(), Quaternion.identity);
+                GameObject Mons_C = Instantiate(Monster_C, GetRandomPosition(), Quaternion.identity);
+                Mons_C.transform.SetParent(MonsterManager.transform, false); 
                 yield return new WaitForSeconds(1f);
             }
         }

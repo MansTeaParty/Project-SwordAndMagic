@@ -43,15 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881b78e6d0748ae4ebaee75120bcc545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterPoolSetting:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  MonsterPoolNum: 0
+  TimeLineCtrler: {fileID: 0}
+  MonsterPoolSettingList:
+  - {fileID: 3408013858690927573, guid: acd4598aeb9ac3744bdb484b5548db1c, type: 3}
+  - {fileID: 2291342214591290137, guid: e5800a2959b6e8e4faabe528b08f141b, type: 3}
+  - {fileID: 2690629465102099882, guid: a992467fc132eb94b83ab12dcbb804ca, type: 3}
