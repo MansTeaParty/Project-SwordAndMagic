@@ -23,14 +23,13 @@ public class MonsterPoolCtrl : MonoBehaviour
     private int Stage_num;
 
     void Start()
-    {
-        MonsterPool_State = MonsterPool.MonsterPool_A;
-        SpawnApprove = false;
+    { 
+        SpawnApprove = true;
     }
 
     void Update()
     {
-        if (SpawnApprove)// 몬스터생성 승인됨
+        if (SpawnApprove == true)
         {
             for (int i = 0; i < 1; i++) //한번만 콜
             {
@@ -131,13 +130,11 @@ public class MonsterPoolCtrl : MonoBehaviour
         return randomPosition;
     }
 
-
-
-    public void SpawnCheck()
+    /*public void SpawnCheck()
     {
         print("몬스터 스폰 시작!");
         //Stage_num = num;
         //print(Stage_num + " 스테이지");
         SpawnApprove = true;    
-    }
+    }*/
 }
