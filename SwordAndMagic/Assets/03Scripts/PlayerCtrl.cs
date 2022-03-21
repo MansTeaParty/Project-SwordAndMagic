@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    //GetInput
+    
+    [Header ("GetInput")]//GetInput
     private int h = 0;
     private int v = 0;
     private bool wDown;
@@ -17,7 +18,8 @@ public class PlayerCtrl : MonoBehaviour
     private bool sUp;
     private bool dUp;
 
-    //Move&Turn
+    
+    [Header("Move&Turn")]//Move&Turn
     private Transform tr;
     private Rigidbody2D rigid;
     private Vector3 currPos;
@@ -30,6 +32,27 @@ public class PlayerCtrl : MonoBehaviour
 
     //BaseAttack
     public GameObject curBaseAttack;
+
+    
+    [Header("PlayerStatus")]//Move&Turn
+    public int playerLevel = 1;        //현재 게임에서의 레벨 = Game_Level
+    public int playerExp = 0;          //현재 게임에서의 경험치 = Class_Exp
+    public int maxHP = 100;
+    public int currentHP = 100;
+    public int armorPoint = 1;         //방어력
+    public int attackDamage = 10;      //기본공격력
+    public float attackSpeed = 3.0f;   //공격속도
+    public float movementSpeed = 1.0f;  //이동속도 계수
+
+
+    [Header("PlayerSubStatus")]
+    public int penetration = 1;        //투사체 관통 횟수
+    public float projectileSpeed = 1.0f;//투사체 이동속도 계수
+    public float projectileScale = 1.0f;//투사체 크기 계수
+    public float knockBack = 0.0f;     //공격시 넉백거리
+    public float expBonus = 1.0f;      //플레이어 획득 경험치량 계수
+    public float goldBonus = 1.0f;     //플레이어 획득 골드량 계수
+ 
 
 
     //public GameManager gameManager;
