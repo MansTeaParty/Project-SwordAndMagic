@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 //using SYMath;
 
+//전세윤, 플레이어 클래스
+//
+//22/03/21
+//게임 외적 레벨은 게임매니저에서 구현하는 게 합당할 듯
+
 public class PlayerCtrl : MonoBehaviour
 {
     
@@ -53,7 +58,6 @@ public class PlayerCtrl : MonoBehaviour
     public float expBonus = 1.0f;      //플레이어 획득 경험치량 계수
     public float goldBonus = 1.0f;     //플레이어 획득 골드량 계수
  
-
 
     //public GameManager gameManager;
 

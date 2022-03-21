@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class CameraCtrl : MonoBehaviour
 {
+    
     public GameObject Target;
     Transform tr;
     void Start()
