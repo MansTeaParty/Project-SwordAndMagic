@@ -30,6 +30,7 @@ public class PlayerCtrl : MonoBehaviour
     private Vector3 currPos;
     public Vector2 moveVec;
     public float moveSpeed = 1.0f;
+    private bool moveable = true;   /// 평상 시의 이동. 구르는 동안 이동을 입력받지 않기 위함. StopMove = 구르기 애니메이션이 시작할 때 Ture가 되고 구르기 애니메이션의 마지막 스프라이트 때 False가 됨
 
 
     //Anim
@@ -37,8 +38,16 @@ public class PlayerCtrl : MonoBehaviour
 
     //BaseAttack
     public GameObject curBaseAttack;
+    [SerializeField]
+    private GameObject FirePos; // 투사체가 생성되는 위치를 담고 있는 객체, FirePosPivot을 부모로 두고 있어서 FirePosPivot이 캐릭터 위치에서 마우스 방향 따라 회전하면 FirePos는 캐릭터를 중심으로 원을 그리며 공전
+    [SerializeField]
+    private GameObject FirePosPivot; // 캐릭터에 종속되어서 동일한 좌표값을 가지며 마우스 방향에 따라 회전 -> FirePosPivot = 사격 방향 
 
-    
+    private bool baseAttackCoolDowned = true;
+
+
+
+
     [Header("PlayerStatus")]//Move&Turn
     public int playerLevel = 1;        //현재 게임에서의 레벨 = Game_Level
     public int playerExp = 0;          //현재 게임에서의 경험치 = Class_Exp
@@ -57,7 +66,9 @@ public class PlayerCtrl : MonoBehaviour
     public float knockBack = 0.0f;     //공격시 넉백거리
     public float expBonus = 1.0f;      //플레이어 획득 경험치량 계수
     public float goldBonus = 1.0f;     //플레이어 획득 골드량 계수
- 
+
+    //Attack
+    
 
     //public GameManager gameManager;
 
@@ -67,7 +78,7 @@ public class PlayerCtrl : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody2D>();
 
-        StartCoroutine("BaseAttack");
+        //StartCoroutine("BaseAttack");
     }
 
     // Start is called before the first frame update
@@ -83,7 +94,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         GetInput();
         Move();
-        //Turn();   //미구현
+        Turn();   //미구현
     }
 
     void GetInput()
@@ -100,6 +111,10 @@ public class PlayerCtrl : MonoBehaviour
         dDown = Input.GetKeyDown(KeyCode.D);
         dUp = Input.GetKeyUp(KeyCode.D);
 
+        if (Input.GetMouseButton(0))
+        {
+            StartCoroutine(BaseAttack());
+        }
     }
     #region Movement
     void Move()
@@ -109,7 +124,14 @@ public class PlayerCtrl : MonoBehaviour
         moveVec = (Vector2.up * v) + (Vector2.right * h);
         //tr.LookAt(tr.position + (Vector3)moveVec);
         //tr.TransformDirection(tr.position + (Vector3)moveVec);
-        tr.position += (Vector3)moveVec * moveSpeed * Time.deltaTime;
+        if (moveable)
+        {
+            tr.position += (Vector3)moveVec * moveSpeed * Time.deltaTime;
+        }
+        else    //구르기중
+        {
+            //tr.position += (Vector3)RollVec * 50.0f * Time.deltaTime; // 구르기로 이동 캐릭터가 이동하는 효과
+        }
         anim.SetInteger("Horizontal", h);
         anim.SetInteger("Vertical", v);
         
@@ -118,30 +140,26 @@ public class PlayerCtrl : MonoBehaviour
         if (sDown) anim.SetTrigger("S");
         if (dDown) anim.SetTrigger("D");
 
-        
-        //if (movevec.magnitude > 0)
-        //{
-        //    anim.setfloat("speed", 1.0f);
-        //}
-        //else
-        //{
-        //    anim.setfloat("speed", 0.0f);
-        //}
-        //if (tr.position != currpos)
-        //{
-        //    anim.setfloat("speed", 1.0f);
-        //    vector3.lerp(tr.position, currpos, time.deltatime * 10.0f);
-        //}
-        //else
-        //{
-        //    anim.setfloat("speed", 0.0f);
-        //}
+
         
     }
 
     void Turn()
     {
+        Vector3 mPosition = Input.mousePosition;
+        Vector3 oPosition = transform.position;
+        mPosition.z = oPosition.z - Camera.main.transform.position.z;
 
+        Vector3 target = Camera.main.ScreenToWorldPoint(mPosition);
+
+        float dy = target.y - oPosition.y;
+        float dx = target.x - oPosition.x;
+        float rotateDegree = Mathf.Atan2(dy, dx) * Mathf.Rad2Deg;
+
+
+        FirePosPivot.transform.rotation = Quaternion.Euler(0f, 0f, rotateDegree); // 사격 방향 설정, PC에서 마우스로 향하는 방향과 동일
+        /*
+         //마우스 방향을 바라봄
         //https://robotree.tistory.com/7
         //먼저 계산을 위해 마우스와 게임 오브젝트의 현재의 좌표를 임시로 저장합니다.
         Vector3 mPosition = Input.mousePosition; //마우스 좌표 저장
@@ -171,6 +189,7 @@ public class PlayerCtrl : MonoBehaviour
 
             //구해진 각도를 오일러 회전 함수에 적용하여 z축을 기준으로 게임 오브젝트를 회전시킵니다.
             transform.rotation = Quaternion.Euler(0f, 0f, rotateDegree);
+        */
     }
 
     #endregion
