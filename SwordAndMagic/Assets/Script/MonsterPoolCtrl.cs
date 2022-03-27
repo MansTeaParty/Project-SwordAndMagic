@@ -52,13 +52,11 @@ public class MonsterPoolCtrl : MonoBehaviour
                 break;
 
             case MonsterPool.MonsterPool_B:
-                //스폰 시작
                 StartCoroutine(MonsterSpawnStart());
                 SpawnApprove = false;
                 break;
 
             case MonsterPool.MonsterPool_C:
-                //스폰 시작
                 StartCoroutine(MonsterSpawnStart());
                 SpawnApprove = false;
                 break;
@@ -74,6 +72,8 @@ public class MonsterPoolCtrl : MonoBehaviour
         {
             for (int i = 0; i < SpawnValue_A; i++)
             {
+                //소환되는 모든 몬스터는 씬에서 활성화되어 있는 MonsterManager를
+                //부모로 하여 MonsterManager 객체 밑에 생성됨.
                 GameObject Mons_A = Instantiate(Monster_A, GetRandomPosition(), Quaternion.identity);
                 Mons_A.transform.SetParent(MonsterManager.transform, false);
                 yield return new WaitForSeconds(1f);
@@ -90,13 +90,19 @@ public class MonsterPoolCtrl : MonoBehaviour
                 Mons_C.transform.SetParent(MonsterManager.transform, false); 
                 yield return new WaitForSeconds(1f);
             }
+
+            //Destroy(gameObject);
+            //지우면 플레이 했을 때 리스트대로 나오는지 확인가능
+            //활성화 하면 몬스터 풀에 할당된 모든 몬스터가 다 소환 완료 되면 
+            //객체 스스로 지워짐
+
         }
     }
 
     //스폰할 위치 결정
     public Vector3 GetRandomPosition()
     {
-        float radius = 100f;
+        float radius = 140f;
         //스폰할 위치 기준이 어디?
         //플레이어 주위 원 반경 밖에서 랜덤 스폰할 거
         //근데 스포너는 캐릭터를 따라다니고 있음 -> 캐릭터 위치 = 스포너 위치

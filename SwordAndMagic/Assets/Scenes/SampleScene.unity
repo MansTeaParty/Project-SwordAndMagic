@@ -1076,10 +1076,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 3169240856452560642, guid: e7dc0c6e4e0f7544cbc342e086429b17, type: 3}
-      propertyPath: orthographic size
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 3169240856452560893, guid: e7dc0c6e4e0f7544cbc342e086429b17, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1177,10 +1173,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5559218498689785170, guid: a454ea6c66897dc4f80147f6152d0a69, type: 3}
-      propertyPath: SetSpawnPoolTime
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 5559218498689785171, guid: a454ea6c66897dc4f80147f6152d0a69, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -1194,10 +1186,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 506528169, guid: 3369162472cb5104abf2c23481a26293, type: 3}
-      propertyPath: m_TagString
-      value: MonsterManager
-      objectReference: {fileID: 0}
     - target: {fileID: 5889563194519100896, guid: 3369162472cb5104abf2c23481a26293, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1246,10 +1234,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TimeLineController
       objectReference: {fileID: 0}
-    - target: {fileID: 5889563194519100903, guid: 3369162472cb5104abf2c23481a26293, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3369162472cb5104abf2c23481a26293, type: 3}
 --- !u!1001 &8568573648429392119
@@ -1259,10 +1243,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8568573648699746032, guid: 3af19ddb9a7b1354e9d4fce50e0bdedc, type: 3}
-      propertyPath: m_Mass
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8568573648699746033, guid: 3af19ddb9a7b1354e9d4fce50e0bdedc, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1270,14 +1250,6 @@ PrefabInstance:
     - target: {fileID: 8568573648699746045, guid: 3af19ddb9a7b1354e9d4fce50e0bdedc, type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8568573648699746045, guid: 3af19ddb9a7b1354e9d4fce50e0bdedc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8568573648699746045, guid: 3af19ddb9a7b1354e9d4fce50e0bdedc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8568573648699746045, guid: 3af19ddb9a7b1354e9d4fce50e0bdedc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1321,7 +1293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8568573648699746047, guid: 3af19ddb9a7b1354e9d4fce50e0bdedc, type: 3}
       propertyPath: PlayerSpeed
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3af19ddb9a7b1354e9d4fce50e0bdedc, type: 3}

@@ -25,17 +25,18 @@ public class TimeLine : MonoBehaviour
 
     public void NextPool()
     {
-        //Debug.Log("nextpool 호출 완료");
         isNextPool = true;
-        //poolNum++;
 
         //Debug.Log("poolNum : " + poolNum);
         NowSpawnPool = MonsterPoolSettingList[poolNum];
         //Debug.Log(NowSpawnPool);
 
         if (isNextPool)
-        { 
-            PoolControl();
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                PoolControl();
+            }
             poolNum++;
             //Debug.Log("poolNum : " + poolNum);
             isNextPool = false;

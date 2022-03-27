@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         //currentTime을 시간에 따라 + 시킴
         currentTime += Time.deltaTime;
-        //Debug.Log("현재 시간 : " + (int)currentTime);
+        Debug.Log("현재 시간 : " + (int)currentTime);
 
         //몇 배수일 때 -> SetSpawnPoolTime초 마다
         //문제점 : 1초동안 실행되는 문장이라는 것
