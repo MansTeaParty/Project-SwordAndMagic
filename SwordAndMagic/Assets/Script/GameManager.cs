@@ -51,18 +51,15 @@ public class GameManager : MonoBehaviour
     {
         //currentTime을 시간에 따라 + 시킴
         currentTime += Time.deltaTime;
-        Debug.Log("현재 시간 : " + (int)currentTime);
+        //Debug.Log("현재 시간 : " + (int)currentTime);
 
         //몇 배수일 때 -> SetSpawnPoolTime초 마다
-        if ((int)currentTime % SetSpawnPoolTime == 0)
+        //문제점 : 1초동안 실행되는 문장이라는 것
+        //update로 엄청나게 많이 호출 하기 때문에 
+        //TimeLine.cs의 리스트 인덱스 값이 덩달아 올라감.
+        if ((int)currentTime % SetSpawnPoolTime == 0 && isSpawnAble == true)
         {
-            for (int i = 0; i < 1; i++)
-            {
-                Debug.Log(SetSpawnPoolTime + "초 지남");
-                Debug.Log("다음 몬스터 풀 생성");
-                //TimeLine.cs의 NextPool 함수
-                SelectingTimeLine.SendMessage("NextPool");
-            }
+            StartCoroutine(SpawnCool());
         }
     }
 
@@ -71,6 +68,20 @@ public class GameManager : MonoBehaviour
     void RecieveTimeLine(GameObject timeline)
     {
         SelectingTimeLine = timeline;
-        Debug.Log("SelectingTimeLine: " + SelectingTimeLine);
+        //Debug.Log("SelectingTimeLine: " + SelectingTimeLine);
+    }
+
+    IEnumerator SpawnCool()
+    {
+        isSpawnAble = false;
+
+        //Debug.Log(SetSpawnPoolTime + "초 지남");
+        //Debug.Log("다음 몬스터 풀 생성");
+        //TimeLine.cs의 NextPool 함수호출
+        SelectingTimeLine.SendMessage("NextPool");
+
+        //Debug.Log("nextpool 호출");
+        yield return new WaitForSeconds(30.0f);
+        isSpawnAble = true;
     }
 }

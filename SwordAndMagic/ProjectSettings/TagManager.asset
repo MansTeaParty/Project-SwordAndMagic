@@ -8,6 +8,7 @@ TagManager:
   - MonsterPool
   - TimeLineController
   - GameManager
+  - MonsterManager
   layers:
   - Default
   - TransparentFX
