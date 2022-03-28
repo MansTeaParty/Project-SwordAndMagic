@@ -11,6 +11,8 @@ using UnityEngine.UI;
 
 public class PlayerCtrl : MonoBehaviour
 {
+
+    public GameManager GameManager;
     
     [Header ("GetInput")]//GetInput
     private int h = 0;
@@ -235,15 +237,6 @@ public class PlayerCtrl : MonoBehaviour
     }
 
 
-    IEnumerator OnDamage()  //데미지를 입은 상태
-    {
-        isDamaged = true;
-        render.color = new Color(1, 1, 1, 0.5f);
-        yield return new WaitForSeconds(1f);
-        render.color = new Color(1, 1, 1, 1);
-        isDamaged = false;
-
-    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -258,16 +251,42 @@ public class PlayerCtrl : MonoBehaviour
                 Debug.Log(currentHP+","+HP_Bar.value);
                 if (currentHP <= 0)
                 {
-                    PlayerDie();
+                    StartCoroutine(PlayerDie());
                 }
-                StartCoroutine(OnDamage());
+                else
+                {
+                    StartCoroutine(OnDamage());
+                }
             }
         }
     }
+    IEnumerator OnDamage()  //데미지를 입은 상태
+    {
+        isDamaged = true;
+        render.color = new Color(1, 1, 1, 0.5f);
+        yield return new WaitForSeconds(1f);
+        render.color = new Color(1, 1, 1, 1);
+        isDamaged = false;
 
-    void PlayerDie()
+    }
+
+    IEnumerator PlayerDie()
     {
         playerCollider.enabled = false;
         isDie = true;
+
+
+        yield return new WaitForSeconds(1);
+        while (render.color.a > 0)
+        {
+            var color = render.color;
+            //color.a is 0 to 1. So .5*time.deltaTime will take 2 seconds to fade out
+            color.a -= (1.0f * Time.deltaTime);
+
+            render.color = color;
+            //wait for a frame
+            yield return null;
+        }
+        GameManager.playerDie();
     }
 }
