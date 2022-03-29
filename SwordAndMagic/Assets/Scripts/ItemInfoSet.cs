@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//아이템 종류 저장 
 [System.Serializable]
 public class ItemInfo
 {   
@@ -12,6 +14,7 @@ public class ItemInfo
     public int ItemLevel;   
 }
 
+//아이템 저장 리스트.
 public class ItemInfoSet : MonoBehaviour
 {
     public List<ItemInfo> Items = new List<ItemInfo>();
@@ -21,6 +24,8 @@ public class ItemInfoSet : MonoBehaviour
     void Awake()
     {
         //아이템 이미지 배열 동적 할당
+        //유의점: 밑의 행이 정상적으로 실행되려면 이미지들(sprite)이 Resources파일에 반드시 저장 되어 있어야 합니다.
+        //Resources파일 안에 있는 파일에 있으면 상관없습니다. Ex: ItemImages -> Resources안에 있는 파일이름입니다. 
         ItemImages = Resources.LoadAll<Sprite>("ItemImages");       
 
         //아이템 리스트에 아이템 정보 저장

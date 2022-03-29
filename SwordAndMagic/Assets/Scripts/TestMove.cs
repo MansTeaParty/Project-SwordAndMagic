@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//테스트용으로 제작된 임시 플레이어 캐릭터, 사용 및 삭제는 자유로이 결정하셔도 됩니다.
 public class TestMove : MonoBehaviour
 {
     public float moveSpeed = 0.0f;

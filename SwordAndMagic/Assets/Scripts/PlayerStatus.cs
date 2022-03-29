@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//플레이어 능력치 저장 및 아이템 보상으로 인한 효과 적용 및 저장 static으로 싱글톤 적용 
 public class PlayerStatus : MonoBehaviour
 {
     public static PlayerStatus instance;
