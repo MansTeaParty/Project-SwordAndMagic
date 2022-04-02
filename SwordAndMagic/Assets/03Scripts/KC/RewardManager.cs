@@ -127,6 +127,7 @@ public class RewardManager : MonoBehaviour
     //및의 ItemClick2()와 ItemClick3()는 모두 ItemClick1()과 같은 기능을 합니다.
     public void ItemClick1()
     {
+        Debug.Log("ItemClick1");
         for (int h = 0; h < _itemInfoSet.Items.Count; h++)
         {
             if (GameObject.Find("Image1").GetComponent<Image>().sprite == _itemInfoSet.Items[h].ItemImage)

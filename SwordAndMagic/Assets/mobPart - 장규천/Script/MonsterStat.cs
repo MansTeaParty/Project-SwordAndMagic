@@ -5,28 +5,28 @@ using UnityEngine;
 public class MonsterStat : MonoBehaviour
 {
     public enum MonsterState {MonsterIdle, MonsterRun, MonsterAttack, MonsterDie, MonsterHit };
-    public MonsterState Monster_State;
+    public MonsterState monsterState;
 
     //추적할 타깃
-    private GameObject TraceTarget;
+    public GameObject TraceTarget;
     private SpriteRenderer ThisSpriteRenderer;
     private Rigidbody2D rigid;
     private Animator thisAnim;
 
-    public BoxCollider2D Boxcoll;
-    public CapsuleCollider2D Capcoll;
+    public BoxCollider2D boxColl;
+    public CapsuleCollider2D capColl;
 
-    public string MonsterName;
-    public int Attack_Type; // 근접 :0, 원거리 : 1
+    public string monsterName;
+    public int attackType; // 근접 :0, 원거리 : 1
 
-    public float Attack_Range; //근접은 0
-    public float Attack_Cooltime;
+    public float attackRange; //근접은 0
+    public float attackCoolTime;
 
-    public int Monster_HP;
-    public int Monster_Damage;
-    public float Monster_MoveSpeed;
-    public float Monster_DropRate; // 10% = 0.1
-    public int Monster_Exp;
+    public int monsterHP;
+    public int monsterDamage;
+    public float monsterMoveSpeed;
+    public float monsterDropRate; // 10% = 0.1
+    public int monsterExp;
 
     public float KnockBackPower;
 
@@ -44,7 +44,7 @@ public class MonsterStat : MonoBehaviour
         TraceTarget = GameObject.FindGameObjectWithTag("Player");
 
         //처음 생성될 때 idle 상태로 하고자 함.
-        Monster_State = MonsterState.MonsterIdle;
+        monsterState = MonsterState.MonsterIdle;
         isRunAble = true;
         isMonsterDie = false;
 
@@ -53,17 +53,17 @@ public class MonsterStat : MonoBehaviour
     void Update()
     {
         NowMonsterState();
-        Debug.Log(Monster_State);
+        Debug.Log(monsterState);
     }
 
     void NowMonsterState()
     {
-        switch (Monster_State)
+        switch (monsterState)
         {
             case MonsterState.MonsterIdle:
                 if (isRunAble == true)
                 {
-                    Monster_State = MonsterState.MonsterRun;
+                    monsterState = MonsterState.MonsterRun;
                 }
                 break;
 
@@ -117,7 +117,7 @@ public class MonsterStat : MonoBehaviour
         //new Vector3(TraceTarget.transform.position.x, TraceTarget.transform.position.y, 0)
         transform.position = Vector3.MoveTowards(transform.position,
             new Vector3(TraceTarget.transform.position.x, TraceTarget.transform.position.y, 0),
-            Monster_MoveSpeed * Time.deltaTime);
+            monsterMoveSpeed * Time.deltaTime);
 
     }
 
@@ -137,7 +137,7 @@ public class MonsterStat : MonoBehaviour
             //안 해주면 아래에서 run 파라미터를 false 처리해도 
             //몬스터 상태가 run 상태이기 때문에 run가 다시 true로 되서 계속 움직임.
             //그래서 상태를 바꾸어줘야 효과 있음.
-            Monster_State = MonsterState.MonsterHit;
+            monsterState = MonsterState.MonsterHit;
 
             //이동 정지
             isRunAble = false;
@@ -189,12 +189,12 @@ public class MonsterStat : MonoBehaviour
         if (!isMonsterDie)
         {
             isRunAble = true;
-            Monster_State = MonsterState.MonsterIdle;
+            monsterState = MonsterState.MonsterIdle;
         }
         else
         {
             isRunAble = false;
-            Monster_State = MonsterState.MonsterDie;
+            monsterState = MonsterState.MonsterDie;
         }
     }
 
@@ -203,21 +203,21 @@ public class MonsterStat : MonoBehaviour
     void MonsterHPCal(int pcAttackDM)
     {
         //몬스터 체력 계산
-        Monster_HP -= pcAttackDM;
+        monsterHP -= pcAttackDM;
     }
 
     void isMonsterHPzero()
     {
-        if (Monster_HP <= 0)
+        if (monsterHP <= 0)
         {
             isMonsterDie = true;
-            Monster_State = MonsterState.MonsterDie;
+            monsterState = MonsterState.MonsterDie;
             thisAnim.SetTrigger("Death");
 
             //사망처리를 했는데도 간혹 플레이어 공격에 맞는 경우가 있음.
             //collier 꺼주기
-            Boxcoll.enabled = false;
-            Capcoll.enabled = false;
+            boxColl.enabled = false;
+            capColl.enabled = false;
         }
     }
 

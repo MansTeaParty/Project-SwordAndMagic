@@ -244,8 +244,8 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (!isDamaged)
             { 
-                Enemy enemyObject = other.GetComponent<Enemy>();
-                currentHP -= enemyObject.damage;
+                MonsterStat enemyObject = other.GetComponent<MonsterStat>();
+                currentHP -= enemyObject.monsterDamage;
                 HP_Bar.value = currentHP;   //MaxHp는 따로 늘어날때 재보정하므로 xur/max는 안함
                 HP_Text.text = "HP : " + currentHP;
                 Debug.Log(currentHP+","+HP_Bar.value);

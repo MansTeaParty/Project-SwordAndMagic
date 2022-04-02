@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 9150988686007178587}
   m_Layer: 0
   m_Name: Monster_C
-  m_TagString: Monster
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 8543551665867676290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8543551665867676290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 601ff45070a0c0642ad949271a204103, type: 3}
+  m_Script: {fileID: 11500000, guid: de7b4010ac99efb4c94287216e26fde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &9150988686007178587
@@ -204,14 +204,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d140e698cbb35444b2549e483db2bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Monster_State: 0
-  MonsterName: Monster_Slime
-  Attack_Type: 0
-  Attack_Range: 0
-  Attack_Cooltime: 5
-  Monster_HP: 80
-  Monster_Damage: 10
-  Monster_MoveSpeed: 12
-  Monster_DropRate: 0.001
-  Monster_Exp: 12
+  monsterState: 0
+  TraceTarget: {fileID: 0}
+  boxColl: {fileID: 0}
+  capColl: {fileID: 0}
+  monsterName: Monster_Slime
+  attackType: 0
+  attackRange: 0
+  attackCoolTime: 5
+  monsterHP: 80
+  monsterDamage: 10
+  monsterMoveSpeed: 12
+  monsterDropRate: 0.001
+  monsterExp: 12
   KnockBackPower: 20

@@ -9,6 +9,8 @@ public class BaseAttack : MonoBehaviour
 
     private PlayerCtrl PlayerCharacter;
 
+    public int attackDamage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +32,11 @@ public class BaseAttack : MonoBehaviour
         Debug.Log(collision.ToString());
         if (collision.gameObject.tag == "Enemy")
         {
-
+            collision.SendMessage("MonsterHPCal", attackDamage);
             if (penetration > 0)
             {
                 penetration -= 1;
-                collision.tag = "Dead"; //데미지 방식????
+                //collision.tag = "Dead"; //데미지 방식????
                 Destroy(collision.gameObject);
                 if (penetration <= 0)
                 {
@@ -47,5 +49,11 @@ public class BaseAttack : MonoBehaviour
 
             }
         }
+    }
+
+
+    public void RecieveDamage(int dm)
+    {
+        attackDamage = dm;
     }
 }
