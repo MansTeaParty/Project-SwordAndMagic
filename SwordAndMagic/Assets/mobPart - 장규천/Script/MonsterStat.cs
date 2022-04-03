@@ -13,9 +13,6 @@ public class MonsterStat : MonoBehaviour
     private Rigidbody2D rigid;
     private Animator thisAnim;
 
-    public BoxCollider2D Boxcoll;
-    public CapsuleCollider2D Capcoll;
-
     public string MonsterName;
     public int Attack_Type; // 근접 :0, 원거리 : 1
 
@@ -190,8 +187,6 @@ public class MonsterStat : MonoBehaviour
         //게 되는 경우가 생김
         //그래서 RigidBody2D 컴포넌트에서 linear Drag에 값을 줘서 저항을 좀 주자.
 
-
-
     }
 
     IEnumerator KnockBack(Vector2 m_knockBackVec, int m_attackDamage)
@@ -212,7 +207,7 @@ public class MonsterStat : MonoBehaviour
         isMonsterHPzero();
 
         //넉백후 0.5초 뒤 Idle 상태가 됨.
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(10.5f);
         if (!isMonsterDie)
         {
             isRunAble = true;
@@ -235,14 +230,43 @@ public class MonsterStat : MonoBehaviour
             GetComponents<BoxCollider2D>()[0].enabled = false;
             GetComponents<BoxCollider2D>()[1].enabled = false;
 
+
+            StartCoroutine(ObjFlash());
         }
     }
 
     //오브젝트 점멸
-    void ObjFlash()
-    { 
-        
+    //일단 스프라이트 랜더러 껐다켜는 방식으로
+    //시원찮으면 스프라이트 색을 흰색으로 변경하는 식으로 해볼듯
+    IEnumerator ObjFlash()
+    {
+        yield return new WaitForSeconds(2.0f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            ThisSpriteRenderer.enabled = false;
+
+            yield return new WaitForSeconds(0.3f);
+
+            ThisSpriteRenderer.enabled = true;
+
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            ThisSpriteRenderer.enabled = false;
+
+            yield return new WaitForSeconds(0.15f);
+
+            ThisSpriteRenderer.enabled = true;
+
+            yield return new WaitForSeconds(0.15f);
+        }
+
+        Destroy(gameObject);
     }
+
 
     void GiveExpToPlayer()
     { }
