@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3552398834530123212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3552398834530123215}
+  - component: {fileID: 3552398834530123214}
+  m_Layer: 0
+  m_Name: TimeLine_B
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3552398834530123215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3552398834530123212}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3552398834530123214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3552398834530123212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881b78e6d0748ae4ebaee75120bcc545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeLineCtrler: {fileID: 0}
+  MonsterPoolSettingList:
+  - {fileID: 2291342214591290137, guid: e5800a2959b6e8e4faabe528b08f141b, type: 3}
+  - {fileID: 3408013858690927573, guid: acd4598aeb9ac3744bdb484b5548db1c, type: 3}
+  - {fileID: 2690629465102099882, guid: a992467fc132eb94b83ab12dcbb804ca, type: 3}
+  - {fileID: 3408013858690927573, guid: acd4598aeb9ac3744bdb484b5548db1c, type: 3}
+  - {fileID: 2291342214591290137, guid: e5800a2959b6e8e4faabe528b08f141b, type: 3}
+  - {fileID: 2690629465102099882, guid: a992467fc132eb94b83ab12dcbb804ca, type: 3}
+  - {fileID: 3408013858690927573, guid: acd4598aeb9ac3744bdb484b5548db1c, type: 3}
+  - {fileID: 3408013858690927573, guid: acd4598aeb9ac3744bdb484b5548db1c, type: 3}
+  - {fileID: 3408013858690927573, guid: acd4598aeb9ac3744bdb484b5548db1c, type: 3}
+  NowSpawnPool: {fileID: 0}
+  poolNum: 0
