@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 8398390274278244733}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_LocalScale: {x: 10, y: 10, z: 15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -204,9 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d140e698cbb35444b2549e483db2bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MonsterId: 0
   Monster_State: 0
-  Boxcoll: {fileID: 1191087274}
-  Capcoll: {fileID: 0}
   MonsterName: Monster_Bat
   Attack_Type: 0
   Attack_Range: 0
@@ -217,3 +216,6 @@ MonoBehaviour:
   Monster_DropRate: 0.001
   Monster_Exp: 10
   KnockBackPower: 1
+  DamageFont: {fileID: 3895946128422453707, guid: 038f9b9718e550d44b59df653197064f, type: 3}
+  attackDamageForText: 0
+  HitEft: {fileID: 940301946638717030, guid: fcafeb082a814314a83134f1e3efaa61, type: 3}
