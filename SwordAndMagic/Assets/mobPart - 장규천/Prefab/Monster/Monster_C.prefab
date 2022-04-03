@@ -216,4 +216,4 @@ MonoBehaviour:
   Monster_MoveSpeed: 12
   Monster_DropRate: 0.001
   Monster_Exp: 12
-  KnockBackPower: 20
+  KnockBackPower: 1

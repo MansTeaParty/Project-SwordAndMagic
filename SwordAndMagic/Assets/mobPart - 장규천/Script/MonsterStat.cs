@@ -146,51 +146,70 @@ public class MonsterStat : MonoBehaviour
             //안 해주면 아래에서 run 파라미터를 false 처리해도 
             //몬스터 상태가 run 상태이기 때문에 run가 다시 true로 되서 계속 움직임.
             //그래서 상태를 바꾸어줘야 효과 있음.
-            Monster_State = MonsterState.MonsterHit;
+            //Monster_State = MonsterState.MonsterHit;
 
             //이동 정지
-            isRunAble = false;
-            thisAnim.SetBool("Run", false);
+            //isRunAble = false;
+            //thisAnim.SetBool("Run", false);
 
             //몬스터 체력 확인
-            isMonsterHPzero();
+            //isMonsterHPzero();
 
             //hit 애니메이션으로 전환
-            thisAnim.SetTrigger("Hit");
+            //thisAnim.SetTrigger("Hit");
 
             //넉백
-            KnockBack(coll.transform.position);
+            //KnockBack(coll.transform.position);
 
         }
     }
 
+    public void Hit(int attackDamage)
+    {
+        Vector2 knockBackVec = new Vector2(transform.position.x - TraceTarget.transform.position.x, transform.position.y - TraceTarget.transform.position.y);
+
+        StartCoroutine(KnockBack(knockBackVec, attackDamage));
+    }
+    
     void KnockBack(Vector2 pos)
     {
+        /*
         //어떤 방향에서 공격에 맞을지 모르기 때문에 밀려날 방향을 계산해야함.
         //이 객체의 포지션 x - 맞은 객체의 x 값 recX가 0보다 크면 1 , 작으면 -1
         //recX가 1이면 오른쪽으로 밀려나고 recX가 -1이면 왼쪽으로 밀려남
         //rexY가 1이면 위로 밀려나고 recY가 -1이면 아래로 밀려남.
         int recX = this.transform.position.x - pos.x > 0 ? 1 : -1;
         int recY = this.transform.position.y - pos.y > 0 ? 1 : -1;
-        /*Debug.Log("recX: " + recX);
-        Debug.Log("recY: " + recY);*/
-
+        //Debug.Log("recX: " + recX);
+        //Debug.Log("recY: " + recY);
         rigid.AddForce(new Vector2(recX, recY) * KnockBackPower, ForceMode2D.Impulse);
-
-        StartCoroutine(KnockBackTime());
+        */
 
         //rigid 쓰게 되면 발생하는 문제가
         //밀려나는 애들이 다른애들에게 부딪히면 부딛힌 애들이 물리적으로 밀려나서 멀리 날아가
         //게 되는 경우가 생김
         //그래서 RigidBody2D 컴포넌트에서 linear Drag에 값을 줘서 저항을 좀 주자.
 
+
+
     }
 
-    IEnumerator KnockBackTime()
+    IEnumerator KnockBack(Vector2 m_knockBackVec, int m_attackDamage)
     {
-        yield return new WaitForSeconds(0.1f);
-        //넉백되는 물리적 속도를 0으로 초기화 해서 멈춰줌.
-        rigid.velocity = new Vector2(0f, 0f);
+        float a = KnockBackPower;
+        Monster_HP -= m_attackDamage;
+
+        thisAnim.SetTrigger("Hit");
+
+        for (int i = 0; i < 10; i++)
+        {
+            transform.position += (Vector3)m_knockBackVec.normalized *a ;
+            a -= KnockBackPower / 10.0f;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+
+        isMonsterHPzero();
 
         //넉백후 0.5초 뒤 Idle 상태가 됨.
         yield return new WaitForSeconds(0.5f);
@@ -199,33 +218,23 @@ public class MonsterStat : MonoBehaviour
             isRunAble = true;
             Monster_State = MonsterState.MonsterIdle;
         }
-        else
-        {
-            isRunAble = false;
-            Monster_State = MonsterState.MonsterDie;
-        }
     }
 
-
-    //플레이어가 한 공격이 호출하는 함수
-    void MonsterHPCal(int pcAttackDM)
-    {
-        //몬스터 체력 계산
-        Monster_HP -= pcAttackDM;
-    }
 
     void isMonsterHPzero()
     {
         if (Monster_HP <= 0)
         {
-            isMonsterDie = true;
             Monster_State = MonsterState.MonsterDie;
+
+            isMonsterDie = true;
             thisAnim.SetTrigger("Death");
 
             //사망처리를 했는데도 간혹 플레이어 공격에 맞는 경우가 있음.
             //collier 꺼주기
             GetComponents<BoxCollider2D>()[0].enabled = false;
             GetComponents<BoxCollider2D>()[1].enabled = false;
+
         }
     }
 
