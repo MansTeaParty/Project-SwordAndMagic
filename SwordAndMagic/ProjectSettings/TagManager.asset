@@ -4,12 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Monster
-  - MonsterPool
-  - TimeLineController
-  - GameManager
-  - MonsterManager
   - PlayerAttack
+  - Enemy
+  - GameManager
+  - Monster
+  - TimeLineController
+  - MonsterPool
+  - RewardBox
+  - MonsterManager
   layers:
   - Default
   - TransparentFX
