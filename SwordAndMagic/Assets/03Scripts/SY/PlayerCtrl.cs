@@ -61,12 +61,17 @@ public class PlayerCtrl : MonoBehaviour
 
 
     [Header("PlayerStatus")]//PlayerStatus
+    public PlayerStatus PlayerStatus;
+    
     public int playerLevel = 1;        //현재 게임에서의 레벨 = Game_Level
     public int playerExp = 0;          //현재 게임에서의 경험치 = Class_Exp
-    public int maxHP = 100;
+
     public int currentHP = 100;
     public Slider HP_Bar;
     public Text HP_Text;
+
+    /*
+    public int maxHP = 100;
     public int armorPoint = 1;         //방어력
     public int attackDamage = 10;      //기본공격력
     public float attackSpeed = 0.5f;   //공격속도
@@ -80,9 +85,10 @@ public class PlayerCtrl : MonoBehaviour
     public float knockBack = 0.0f;     //공격시 넉백거리
     public float expBonus = 1.0f;      //플레이어 획득 경험치량 계수
     public float goldBonus = 1.0f;     //플레이어 획득 골드량 계수
+    */
 
     //Attack
-    
+
 
     //public GameManager gameManager;
 
@@ -93,7 +99,9 @@ public class PlayerCtrl : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         render = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<Collider2D>();
-        HP_Bar.maxValue = maxHP;
+        PlayerStatus = GetComponentInChildren<PlayerStatus>();
+
+        HP_Bar.maxValue = PlayerStatus.maxHP;
         HP_Bar.value = currentHP;
         HP_Text.text = "HP : " + currentHP;
         //StartCoroutine("BaseAttack");
@@ -224,7 +232,7 @@ public class PlayerCtrl : MonoBehaviour
                 //anim.SetBool("isAttack", true);
                 //anim.SetTrigger("Attack");
                 Instantiate(normalAttackProjectile, FirePos.transform.position, FirePosPivot.transform.rotation);
-                yield return new WaitForSeconds(attackSpeed);
+                yield return new WaitForSeconds(PlayerStatus.attackSpeed);
                 Attackable = true;
 
         
@@ -244,7 +252,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (!isDamaged)
             { 
-                MonsterStat enemyObject = other.GetComponent<MonsterStat>();
+                MonsterCtrl enemyObject = other.GetComponent<MonsterCtrl>();
                 currentHP -= enemyObject.monsterDamage;
                 HP_Bar.value = currentHP;   //MaxHp는 따로 늘어날때 재보정하므로 xur/max는 안함
                 HP_Text.text = "HP : " + currentHP;

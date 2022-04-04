@@ -32,7 +32,7 @@ public class BaseAttack : MonoBehaviour
         Debug.Log(collision.ToString());
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.SendMessage("MonsterHPCal", attackDamage);
+            collision.GetComponent < MonsterCtrl>().MonsterDamaged(attackDamage);
             if (penetration > 0)
             {
                 penetration -= 1;
