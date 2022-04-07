@@ -11,12 +11,16 @@ public class PlayerStatus : MonoBehaviour
     [Header("PlayerStatus")]//PlayerStatus
    
     public int maxHP = 100;     //HP는 자주 변화하는 영역이므로 일단은 플레이어에 넣었음, 개발 진행에 따라 변화할 듯
-
-
+    public int currentHP = 100;
+    public int maxMP = 3;       //~23
+    public int currentMP = 3;
+    public int MPregen = 3;     //~23
     public int armorPoint = 1;         //방어력
     public int attackDamage = 10;      //기본공격력
+    public float baseAttackSpeed = 3;       //기본공격속도attackSpeed - (baseAttackSpeed * 0.3) (3-23추가)
     public float attackSpeed = 0.5f;   //공격속도
-    public float movementSpeed = 1.0f;  //이동속도 계수
+    public float basemovementSpeed = 3;
+     public float movementSpeed = 1.0f;  //이동속도 계수
 
 
     [Header("PlayerSubStatus")]
