@@ -13,13 +13,11 @@ GameObject:
   - component: {fileID: 1191087275}
   - component: {fileID: 1191087274}
   - component: {fileID: 2783419218049823358}
-  - component: {fileID: 1578283604}
   - component: {fileID: 459946660}
-  - component: {fileID: 810485612745791112}
-  - component: {fileID: 2364262773125155617}
+  - component: {fileID: 6530143149172557174}
   m_Layer: 0
   m_Name: Monster_A
-  m_TagString: Enemy
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8398390274278244733}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -102,7 +100,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 5
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -143,7 +141,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8398390274278244733}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -162,22 +160,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.42831212, y: 0.40628225}
   m_EdgeRadius: 0
---- !u!70 &1578283604
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8398390274278244733}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 0.3}
-  m_Direction: 1
 --- !u!95 &459946660
 Animator:
   serializedVersion: 3
@@ -188,7 +170,7 @@ Animator:
   m_GameObject: {fileID: 8398390274278244733}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ec24e4ddfe3ded84495eefe4576cc9fe, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3525a1745c037ce4e822e8d24773b4b3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -197,7 +179,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &810485612745791112
+--- !u!114 &6530143149172557174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,32 +188,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8398390274278244733}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de7b4010ac99efb4c94287216e26fde1, type: 3}
+  m_Script: {fileID: 11500000, guid: ba2cc3e1681fda144a50dec71cf134d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2364262773125155617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8398390274278244733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d140e698cbb35444b2549e483db2bc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterState: 0
-  TraceTarget: {fileID: 0}
-  boxColl: {fileID: 1191087274}
-  capColl: {fileID: 1578283604}
-  monsterName: 
-  attackType: 0
-  attackRange: 0
-  attackCoolTime: 0
-  monsterHP: 0
-  monsterDamage: 0
-  monsterMoveSpeed: 0
-  monsterDropRate: 0
-  monsterExp: 0
-  KnockBackPower: 30
+  MonsterId: 0
+  MonsterName: 'Monster_Bat '
+  Attack_Type: MeeleMonster
+  Attack_Range: 0
+  AttackCooltime: 0
+  MonsterHP: 50
+  MonsterDamage: 5
+  MonsterMoveSpeed: 15
+  MonsterDropRate: 100
+  MonsterExp: 10
+  KnockBackPower: 1
+  DamageFont: {fileID: 3895946128422453707, guid: 038f9b9718e550d44b59df653197064f, type: 3}
+  attackDamageForText: 0
+  isDead: 0
+  HitEft: {fileID: 940301946638717030, guid: fcafeb082a814314a83134f1e3efaa61, type: 3}
+  attackProjectile: {fileID: 0}
+  RewardBox: {fileID: 42248514509484756, guid: fa251edb20e18ee4ab908e7604d1c634, type: 3}

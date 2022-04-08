@@ -14,11 +14,10 @@ GameObject:
   - component: {fileID: 707137124}
   - component: {fileID: -2796125177322622221}
   - component: {fileID: 1415744357}
-  - component: {fileID: 3924827948867915157}
-  - component: {fileID: 9150988686007178587}
+  - component: {fileID: -8657890758755520566}
   m_Layer: 0
   m_Name: Monster_C
-  m_TagString: Enemy
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8543551665867676290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -101,7 +100,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 5
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -180,7 +179,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3924827948867915157
+--- !u!114 &-8657890758755520566
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,32 +188,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8543551665867676290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de7b4010ac99efb4c94287216e26fde1, type: 3}
+  m_Script: {fileID: 11500000, guid: ba2cc3e1681fda144a50dec71cf134d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9150988686007178587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8543551665867676290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d140e698cbb35444b2549e483db2bc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterState: 0
-  TraceTarget: {fileID: 0}
-  boxColl: {fileID: 0}
-  capColl: {fileID: 0}
-  monsterName: Monster_Slime
-  attackType: 0
-  attackRange: 0
-  attackCoolTime: 5
-  monsterHP: 80
-  monsterDamage: 10
-  monsterMoveSpeed: 12
-  monsterDropRate: 0.001
-  monsterExp: 12
-  KnockBackPower: 20
+  MonsterId: 3
+  MonsterName: Monster_SpikedSlime
+  Attack_Type: RangeMonster
+  Attack_Range: 50
+  AttackCooltime: 6
+  MonsterHP: 80
+  MonsterDamage: 5
+  MonsterMoveSpeed: 8
+  MonsterDropRate: 150
+  MonsterExp: 50
+  KnockBackPower: 1
+  DamageFont: {fileID: 3895946128422453707, guid: 038f9b9718e550d44b59df653197064f, type: 3}
+  attackDamageForText: 0
+  isDead: 0
+  HitEft: {fileID: 940301946638717030, guid: fcafeb082a814314a83134f1e3efaa61, type: 3}
+  attackProjectile: {fileID: 5675334179591625566, guid: dde57a5668914be49ae5075dd276b03d, type: 3}
+  RewardBox: {fileID: 42248514509484756, guid: fa251edb20e18ee4ab908e7604d1c634, type: 3}
