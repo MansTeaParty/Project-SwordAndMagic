@@ -61,7 +61,7 @@ public class PlayerCtrl : MonoBehaviour
 
 
     [Header("PlayerStatus")]//PlayerStatus
-    public PlayerStatus PlayerStatus;
+    public PlayerStatus playerStatus;
     
     public int playerLevel = 1;        //현재 게임에서의 레벨 = Game_Level
     public int playerExp = 0;          //현재 게임에서의 경험치 = Class_Exp
@@ -99,9 +99,9 @@ public class PlayerCtrl : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         render = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<Collider2D>();
-        PlayerStatus = GetComponentInChildren<PlayerStatus>();
+        playerStatus = GetComponentInChildren<PlayerStatus>();
 
-        HP_Bar.maxValue = PlayerStatus.maxHP;
+        HP_Bar.maxValue = playerStatus.maxHP;
         HP_Bar.value = currentHP;
         HP_Text.text = "HP : " + currentHP;
         //StartCoroutine("BaseAttack");
@@ -225,15 +225,22 @@ public class PlayerCtrl : MonoBehaviour
 
     #endregion
 
+
+    #region Battle
     IEnumerator BaseAttack()
     {
 
-                Attackable = false;
-                //anim.SetBool("isAttack", true);
-                //anim.SetTrigger("Attack");
-                Instantiate(normalAttackProjectile, FirePos.transform.position, FirePosPivot.transform.rotation);
-                yield return new WaitForSeconds(PlayerStatus.attackSpeed);
-                Attackable = true;
+        Attackable = false;
+        playerStatus.currentMP += playerStatus.MPregen;
+        if(playerStatus.currentMP>=playerStatus.MPregen)
+        {
+
+        }
+        //anim.SetBool("isAttack", true);
+        //anim.SetTrigger("Attack");
+        Instantiate(normalAttackProjectile, FirePos.transform.position, FirePosPivot.transform.rotation);
+        yield return new WaitForSeconds(playerStatus.attackSpeed);
+        Attackable = true;
 
         
         //while (true)
@@ -244,7 +251,7 @@ public class PlayerCtrl : MonoBehaviour
         
     }
 
-
+    #endregion
 
     void OnTriggerEnter2D(Collider2D other)
     {
