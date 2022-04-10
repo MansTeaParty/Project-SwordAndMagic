@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5670456372449391615}
   - component: {fileID: 592150000079566143}
   m_Layer: 0
-  m_Name: Slime Attack
+  m_Name: S_Slime Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

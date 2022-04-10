@@ -13,29 +13,22 @@ public class TimeLine : MonoBehaviour
     public int poolNum;
     void Start()
     {
-        TimeLineCtrler = GameObject.FindGameObjectWithTag("TimeLineController");
-
-        //poolNum = 0; -> 이거 땜시 리스트가 잘 안 돌아감.
-        //이거 주석처리하니깐 리스트 잘됨 왜지?
-        //아니 초기화 해줘도 ㅈㄹ, 안 해 줘도 ㅈㄹ
-        //알다가도 모르겠네 젠장
-
+        //TimeLineCtrler = GameObject.FindGameObjectWithTag("TimeLineController");
         isNextPool = false;
     }
 
+    //게임 매니저가 일정 시간마다 호출하여 몬스터 풀이 생성됨.
     public void NextPool()
     {
         isNextPool = true;
 
-        //Debug.Log("poolNum : " + poolNum);
         NowSpawnPool = MonsterPoolSettingList[poolNum];
-        //Debug.Log(NowSpawnPool);
 
         if (isNextPool)
         {
-            PoolControl();
-            poolNum++;
-            //Debug.Log("poolNum : " + poolNum);
+            PoolControl();      //몬스터풀 스폰  
+            poolNum++;          //다음 몬스터 풀의 생성을 위해 몬스터풀 인덱스 +1 시킴.
+                                //그럼 다음 호출 때 다음 몬스터 풀이 생성될 것임.
             isNextPool = false;
         }
 

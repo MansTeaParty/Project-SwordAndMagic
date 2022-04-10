@@ -25,9 +25,11 @@ public class BaseAttack : MonoBehaviour
         //transform.localScale = new Vector3(transform.localScale.x * PC.projectile_size, transform.localScale.y * PC.projectile_size, 1);
 
         //Destroy(gameObject, 1);
+        Destroy(gameObject, 5.0f);
+
         System.Array.Resize(ref monster, penetration);
         GetComponent<BoxCollider2D>().enabled = true;
-        Destroy(gameObject, 5.0f);
+        
     }
 
     // Update is called once per frame

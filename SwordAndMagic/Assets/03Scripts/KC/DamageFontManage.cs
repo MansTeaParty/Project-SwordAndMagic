@@ -49,19 +49,24 @@ public class DamageFontManage : MonoBehaviour
         upSpeed = 0.0f;
         for (int i = 0; i < 10; i++)
         {
-            upSpeed += 1f;
+            upSpeed += 0.8f;// 폰트가 출력되면 서서히 올라가면서
             if (i < 3)
             {
-                float scale = 0f;
-                if (monsterid == 0) //박쥐
+                //폰트의 스케일 값을 증가 -> 폰트가 점점 커지는 효과
+                float scale = 0.0f;
+                if (monsterid == 1) //박쥐
                 {
-                    scale = 0.0012f;
+                    scale = 0.0008f;
                 }
                 if (monsterid == 2) //골렘
                 {
                     scale = 0.0007f;
                 }
-                if (monsterid == 3) //슬라임
+                if (monsterid == 3) //Spiked 슬라임
+                {
+                    scale = 0.0007f;
+                }
+                if (monsterid == 4) // Tentacle 슬라임
                 {
                     scale = 0.0007f;
                 }
@@ -70,9 +75,9 @@ public class DamageFontManage : MonoBehaviour
 
                 yield return new WaitForSeconds(0.1f);
             }
-            else
+            else // i >= 3
             {
-                //점차 희미해지도록
+                //점차 희미해지도록 컬러 R 값을 점점 뺌
                 text.color -= new Color(30, 0, 0, 0.1f);
                 yield return new WaitForSeconds(0.08f);
             }
