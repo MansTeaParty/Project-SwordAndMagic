@@ -29,7 +29,7 @@ public class BaseAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.ToString());
+        //Debug.Log(collision.ToString());
         if (collision.gameObject.tag == "Enemy")
         {
             collision.GetComponent < MonsterCtrl>().MonsterDamaged(attackDamage);

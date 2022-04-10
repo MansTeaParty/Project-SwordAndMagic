@@ -54,10 +54,12 @@ public class PlayerCtrl : MonoBehaviour
 
 
     [Header("Battle")]
-    private bool isDamaged = false;
+    public bool isDamaged = false;
     private bool isDie = false;
     private Collider2D playerCollider;
 
+    [Header("Skill")]
+    public InherenceSkill inherenceSkill;
 
 
     [Header("PlayerStatus")]//PlayerStatus
@@ -70,22 +72,7 @@ public class PlayerCtrl : MonoBehaviour
     public Slider HP_Bar;
     public Text HP_Text;
 
-    /*
-    public int maxHP = 100;
-    public int armorPoint = 1;         //방어력
-    public int attackDamage = 10;      //기본공격력
-    public float attackSpeed = 0.5f;   //공격속도
-    public float movementSpeed = 1.0f;  //이동속도 계수
 
-
-    [Header("PlayerSubStatus")]
-    public int penetration = 1;        //투사체 관통 횟수
-    public float projectileSpeed = 1.0f;//투사체 이동속도 계수
-    public float projectileScale = 1.0f;//투사체 크기 계수
-    public float knockBack = 0.0f;     //공격시 넉백거리
-    public float expBonus = 1.0f;      //플레이어 획득 경험치량 계수
-    public float goldBonus = 1.0f;     //플레이어 획득 골드량 계수
-    */
 
     //Attack
 
@@ -100,6 +87,7 @@ public class PlayerCtrl : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<Collider2D>();
         playerStatus = GetComponentInChildren<PlayerStatus>();
+        inherenceSkill = GetComponentInChildren<InherenceSkill>();
 
         HP_Bar.maxValue = playerStatus.maxHP;
         HP_Bar.value = currentHP;
@@ -234,7 +222,9 @@ public class PlayerCtrl : MonoBehaviour
         playerStatus.currentMP += playerStatus.MPregen;
         if(playerStatus.currentMP>=playerStatus.MPregen)
         {
-
+            playerStatus.currentMP = playerStatus.maxMP;
+            //activeInherenceSkill();
+            
         }
         //anim.SetBool("isAttack", true);
         //anim.SetTrigger("Attack");
@@ -251,19 +241,35 @@ public class PlayerCtrl : MonoBehaviour
         
     }
 
+    void activeInherenceSkill()   // 고유스킬
+    {
+        inherenceSkill.CastSkill();
+    }
+
     #endregion
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other) //before OnTriggerStay2D OnTriggerEnter2D
     {
         if (other.tag == "Enemy")
         {
-            if (!isDamaged)
-            { 
+            EnemyCollised(other);
+            //Debug.Log("coll:" + other.name);
+        }
+            
+    }
+
+
+    void EnemyCollised(Collider2D other)
+    {
+        if (!isDamaged)
+        {
+            if (!inherenceSkill.Damaged())
+            {
                 MonsterCtrl enemyObject = other.GetComponent<MonsterCtrl>();
                 currentHP -= enemyObject.monsterDamage;
                 HP_Bar.value = currentHP;   //MaxHp는 따로 늘어날때 재보정하므로 xur/max는 안함
                 HP_Text.text = "HP : " + currentHP;
-                Debug.Log(currentHP+","+HP_Bar.value);
+                Debug.Log(currentHP + "," + HP_Bar.value);
                 if (currentHP <= 0)
                 {
                     StartCoroutine(PlayerDie());
@@ -275,6 +281,7 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
     }
+
     IEnumerator OnDamage()  //데미지를 입은 상태
     {
         isDamaged = true;
