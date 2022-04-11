@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 370152872527989858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterState: 0
   TraceTarget: {fileID: 0}
-  boxColl: {fileID: 0}
+  boxColl: {fileID: 1523551684}
   capColl: {fileID: 0}
   monsterName: Monster_Golem
   attackType: 0
@@ -216,5 +216,5 @@ MonoBehaviour:
   monsterDamage: 20
   monsterMoveSpeed: 10
   monsterDropRate: 0.001
-  monsterExp: 20
-  KnockBackPower: 25
+  monsterExp: 2
+  KnockBackPower: 10

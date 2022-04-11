@@ -199,6 +199,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -289,6 +293,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -376,6 +384,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: monsterDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
@@ -962,6 +974,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -1024,10 +1040,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb14fb27c320084895c34a92ad778d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inherenceSkill: {fileID: 0}
   requiredLevel: 3
   Option_Damaged: 0
-  ShieldCount: 1
-  ironWall: {fileID: 0}
   skillName: 4
 --- !u!1001 &198011776
 PrefabInstance:
@@ -1102,6 +1117,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: monsterDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
@@ -1197,6 +1216,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: monsterDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
@@ -1297,10 +1320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb14fb27c320084895c34a92ad778d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inherenceSkill: {fileID: 0}
   requiredLevel: 5
   Option_Damaged: 0
-  ShieldCount: 1
-  ironWall: {fileID: 0}
   skillName: 6
 --- !u!1001 &308234527
 PrefabInstance:
@@ -1375,6 +1397,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: monsterDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
@@ -1568,10 +1594,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb14fb27c320084895c34a92ad778d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inherenceSkill: {fileID: 0}
   requiredLevel: 4
   Option_Damaged: 0
-  ShieldCount: 1
-  ironWall: {fileID: 0}
   skillName: 5
 --- !u!1001 &392772027
 PrefabInstance:
@@ -1677,7 +1702,7 @@ MonoBehaviour:
   classLevel: 2
   maxHP: 100
   currentHP: 100
-  maxMP: 3
+  maxMP: 20
   currentMP: 3
   MPregen: 3
   armorPoint: 1
@@ -1692,6 +1717,7 @@ MonoBehaviour:
   knockBack: 0
   expBonus: 1
   goldBonus: 1
+  playerEXP: 0
 --- !u!1 &473504186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,10 +1761,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb14fb27c320084895c34a92ad778d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inherenceSkill: {fileID: 0}
   requiredLevel: 1
   Option_Damaged: 0
-  ShieldCount: 1
-  ironWall: {fileID: 0}
   skillName: 2
 --- !u!1 &519420028
 GameObject:
@@ -1913,6 +1938,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -2033,6 +2062,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -2105,12 +2138,12 @@ MonoBehaviour:
   - {fileID: 370623709}
   - {fileID: 306678685}
   - {fileID: 1874880481}
+  indiSkillBase: {fileID: 0}
   overlapAble: 0
---- !u!61 &696492833 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 1523551684, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
-  m_PrefabInstance: {fileID: 1233724106}
-  m_PrefabAsset: {fileID: 0}
+  ShieldCount: 1000
+  ironWall: {fileID: 0}
+  ironWallKnockBack: {fileID: 0}
+  IronWallDamage: 0
 --- !u!4 &708816147 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8543551665867676293, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
@@ -2399,6 +2432,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -2481,6 +2518,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: monsterDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
@@ -2621,6 +2662,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -2716,6 +2761,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -2725,6 +2774,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+--- !u!1001 &1035319266
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1895502201}
+    m_Modifications:
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255895930929349833, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+      propertyPath: m_Name
+      value: Shield_Effect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
 --- !u!1001 &1039732712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2798,6 +2916,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: monsterDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
@@ -3044,6 +3166,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -3095,29 +3221,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -282723457216800783, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
-      propertyPath: boxColl
-      value: 
-      objectReference: {fileID: 696492833}
-    - target: {fileID: -282723457216800783, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
-      propertyPath: monsterExp
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 370152872527989791, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
       propertyPath: m_RootOrder
       value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 370152872527989791, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 370152872527989791, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 370152872527989791, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 370152872527989791, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3394,6 +3500,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376781828}
   m_CullTransparentMesh: 1
+--- !u!4 &1423494254 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1255895930929349832, guid: cb5a01daeb474c34b9ff61ea7d58fe2f, type: 3}
+  m_PrefabInstance: {fileID: 1035319266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1450813814
 GameObject:
   m_ObjectHideFlags: 0
@@ -3671,6 +3782,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -3733,10 +3848,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb14fb27c320084895c34a92ad778d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inherenceSkill: {fileID: 0}
   requiredLevel: 2
   Option_Damaged: 0
-  ShieldCount: 1
-  ironWall: {fileID: 0}
   skillName: 3
 --- !u!1 &1568647511
 GameObject:
@@ -3781,10 +3895,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb14fb27c320084895c34a92ad778d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inherenceSkill: {fileID: 0}
   requiredLevel: 0
   Option_Damaged: 0
-  ShieldCount: 100
-  ironWall: {fileID: 9029342352477128305, guid: 851e7559e2b05ef4ba825576c181f094, type: 3}
   skillName: 1
 --- !u!1001 &1590152911
 PrefabInstance:
@@ -3793,25 +3906,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2364262773125155617, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
-      propertyPath: monsterHP
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 8398390274278244722, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
       propertyPath: m_RootOrder
       value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 8398390274278244722, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8398390274278244722, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8398390274278244722, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8398390274278244722, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4100,6 +4197,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -4266,6 +4367,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: monsterDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
@@ -4737,6 +4842,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -4824,6 +4933,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: monsterDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
@@ -4963,10 +5076,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb14fb27c320084895c34a92ad778d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inherenceSkill: {fileID: 0}
   requiredLevel: 6
   Option_Damaged: 0
-  ShieldCount: 1
-  ironWall: {fileID: 0}
   skillName: 7
 --- !u!4 &1881080723 stripped
 Transform:
@@ -5090,6 +5202,7 @@ Transform:
   - {fileID: 1450813815}
   - {fileID: 403983443}
   - {fileID: 687039731}
+  - {fileID: 1423494254}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5384,6 +5497,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -5469,6 +5586,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: attackCoolTime
       value: 5
       objectReference: {fileID: 0}
@@ -5551,6 +5672,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: monsterDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+      propertyPath: KnockBackPower
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9150988686007178587, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}

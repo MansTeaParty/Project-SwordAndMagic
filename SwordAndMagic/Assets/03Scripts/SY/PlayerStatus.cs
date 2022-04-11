@@ -15,8 +15,8 @@ public class PlayerStatus : MonoBehaviour
    
     public int maxHP = 100;     //HP는 자주 변화하는 영역이므로 일단은 플레이어에 넣었음, 개발 진행에 따라 변화할 듯
     public int currentHP = 100;
-    public int maxMP = 3;       //~23
-    public int currentMP = 3;
+    public int maxMP = 10;       //~23
+    public int currentMP = 0;
     public int MPregen = 3;     //~23
     public int armorPoint = 1;         //방어력
     public int attackDamage = 10;      //기본공격력
@@ -24,7 +24,7 @@ public class PlayerStatus : MonoBehaviour
     public float attackSpeed = 0.5f;   //공격속도
     public float basemovementSpeed = 3.0f;
     public float movementSpeed = 1.0f;  //이동속도 계수
-
+    
 
     [Header("PlayerSubStatus")]
     public int penetration = 1;        //투사체 관통 횟수
@@ -33,6 +33,8 @@ public class PlayerStatus : MonoBehaviour
     public float knockBack = 0.0f;     //공격시 넉백거리
     public float expBonus = 1.0f;      //플레이어 획득 경험치량 계수
     public float goldBonus = 1.0f;     //플레이어 획득 골드량 계수
+
+    public int playerEXP;
 
     void Awake()
     {
@@ -54,4 +56,22 @@ public class PlayerStatus : MonoBehaviour
             currentHP = maxHP;
         }
     }
+
+    public bool addPlayerCurrentMP(int MP_Value)
+    {
+        currentMP += MP_Value;
+        Debug.Log("mp회복");
+        if (currentMP >= MP_Value)
+        {
+            currentMP = 0;//= maxMP;
+            return true;
+        }
+        return false;
+    }
+
+    public void addPlayerEXP(int EXP_Value)
+    {
+        playerEXP += Mathf.FloorToInt(EXP_Value * expBonus);
+    }
+
 }

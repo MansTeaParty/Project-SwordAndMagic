@@ -215,6 +215,9 @@ public class MonsterCtrl : MonoBehaviour
     {
         if (monsterHP <= 0)
         {
+            GiveExpToPlayer();
+            Destroy(this);
+
             isMonsterDie = true;
             monsterState = MonsterState.MonsterDie;
             if (thisAnim != null)
@@ -225,6 +228,7 @@ public class MonsterCtrl : MonoBehaviour
             //collier ²¨ÁÖ±â
             boxColl.enabled = false;
             capColl.enabled = false;
+
         }
     }
 
@@ -235,6 +239,8 @@ public class MonsterCtrl : MonoBehaviour
     }
 
     void GiveExpToPlayer()
-    { }
+    {
+        PlayerStatus.instance.addPlayerEXP(monsterExp);
+    }
 
 }

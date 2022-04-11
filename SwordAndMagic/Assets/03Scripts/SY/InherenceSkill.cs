@@ -9,8 +9,15 @@ public class InherenceSkill : MonoBehaviour
 {
     //public List<IndividualSkill> SkillList = new List<IndividualSkill>();
     public IndividualSkill[] SkillArray = new IndividualSkill[7];
+    public IndividualSkill indiSkillBase;
 
-    public bool overlapAble = false;
+    [Header("Crusaders")]
+    public bool overlapAble = false;//방어수 중첩가능여부
+    public int ShieldCount = 1000;
+    public GameObject ironWall;
+    public GameObject ironWallKnockBack;
+    public bool IronWallDamage = false;
+
 
     void Start()
     {
@@ -20,7 +27,12 @@ public class InherenceSkill : MonoBehaviour
             {
                 SkillArray[index].gameObject.SetActive(false);
             }
+            else
+            {
+                SkillArray[index].SetUp();
+            }
         }
+
     }
 
     // Update is called once per frame

@@ -14,6 +14,7 @@ public class BaseAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         //PlayerCharacter = GameObject.Find("Player").GetComponent<PlayerCtrl>();
         //penetration = PlayerCharacter.penetration;
         //transform.localScale = new Vector3(transform.localScale.x * PC.projectile_size, transform.localScale.y * PC.projectile_size, 1);
@@ -37,7 +38,7 @@ public class BaseAttack : MonoBehaviour
             {
                 penetration -= 1;
                 //collision.tag = "Dead"; //데미지 방식????
-                Destroy(collision.gameObject);
+                //Destroy(collision.gameObject);
                 if (penetration <= 0)
                 {
                     Destroy(this.gameObject);

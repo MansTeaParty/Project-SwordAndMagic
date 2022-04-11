@@ -219,13 +219,11 @@ public class PlayerCtrl : MonoBehaviour
     {
 
         Attackable = false;
-        playerStatus.currentMP += playerStatus.MPregen;
-        if(playerStatus.currentMP>=playerStatus.MPregen)
+        if(playerStatus.addPlayerCurrentMP(playerStatus.MPregen))
         {
-            playerStatus.currentMP = playerStatus.maxMP;
-            //activeInherenceSkill();
-            
+            activeInherenceSkill();
         }
+
         //anim.SetBool("isAttack", true);
         //anim.SetTrigger("Attack");
         Instantiate(normalAttackProjectile, FirePos.transform.position, FirePosPivot.transform.rotation);
