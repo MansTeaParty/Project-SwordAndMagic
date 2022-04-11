@@ -60,7 +60,7 @@ public class PlayerStatus : MonoBehaviour
     public bool addPlayerCurrentMP(int MP_Value)
     {
         currentMP += MP_Value;
-        Debug.Log("mp회복");
+        //Debug.Log("mp회복");
         if (currentMP >= MP_Value)
         {
             currentMP = 0;//= maxMP;

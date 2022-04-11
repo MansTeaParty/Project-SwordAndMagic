@@ -13,17 +13,27 @@ using UnityEngine;
 
 public class IndividualSkill : MonoBehaviour
 {
+
     public InherenceSkill inherenceSkill;
 
-    public int requiredLevel=0;
+    public int ClassLevel = 1;
+    public int[] requiredClassLevel = new int[]{1,2,3,4,5,6};
+    
     public bool Option_Damaged = false; //플레이어의 기본 데미지 기믹을 대체하는가
 
+
+    [Header("Crusaders")]
+    public bool overlapAble = false;//방어수 중첩가능여부
+    public int ShieldCount = 1000;
+    public GameObject ironWall;
+    public GameObject ironWallKnockBack;
+    public bool IronWallDamage = false;
 
 
     public enum SkillName
     {
-        NA,
-        CrusaderBase,CrusaderA,CrusaderB, CrusaderC, CrusaderD, CrusaderE, CrusaderF
+        NA, Crusader
+        //CrusaderBase,CrusaderA,CrusaderB, CrusaderC, CrusaderD, CrusaderE, CrusaderF
             
     };
     public SkillName skillName = SkillName.NA;
@@ -33,91 +43,100 @@ public class IndividualSkill : MonoBehaviour
     private void Awake()
     {
         inherenceSkill = GetComponentInParent<InherenceSkill>();
+        ClassLevel = PlayerStatus.instance.classLevel;
     }
 
     public bool Damaged()
     {
-        //Debug.Log("damaged호출");
-        switch (skillName)
+        bool changeOption = false;
+
+        if (true)
         {
-            #region Crusader
-            case SkillName.CrusaderBase:
-                if (inherenceSkill.ShieldCount > 0)
+            if (ShieldCount > 0)
+            {
+                
+                if (IronWall.instance == null)
                 {
-                    inherenceSkill.ShieldCount--;
-                    Instantiate(inherenceSkill.ironWallKnockBack, transform.position, transform.rotation,transform);
-                    //Instantiate(ironWall, transform, false);
-                    return true;
+                    ShieldCount--;
+                    Instantiate(ironWallKnockBack, transform.position, transform.rotation, transform);
                 }
-                else
+                if(ShieldCount<=0)
                 {
-                    return false;
+                    ironWall.SetActive(false);
                 }
-
-            case SkillName.CrusaderA:
-                return false;
-            case SkillName.CrusaderB:
-                PlayerStatus.instance.addPlayerCurrentHP(10);
-                Debug.Log("hp회복");
-                return false;
-            
-
-            case SkillName.CrusaderC:
-                //버프구현해서 따로 빼야됨
-                //PlayerStatus.instance.attackDamage *= 2;
-                return false;
-            
-
-            case SkillName.CrusaderD:
-                //밀쳐내기
-                return false;
-            
-
-            case SkillName.CrusaderE:
-                //버프구현해서 따로 빼야됨
-                //PlayerStatus.instance.movementSpeed +=PlayerStatus.instance.basemovementSpeed*0.5f;
-                return false;
-            
-
-            case SkillName.CrusaderF:
-                //버프구현해서 따로 빼야됨, 이건 파괴타이밍이 실드없어질때임
-                //PlayerStatus.instance.attackSpeed -= PlayerStatus.instance.baseAttackSpeed * 0.3f;
-                return false;
-
-            #endregion
-
-            default:
-                return false;
+                //Instantiate(ironWall, transform, false);
+                changeOption = true;
+            }
+        }
+        
+        if (ClassLevel >= requiredClassLevel[0])
+        {
         }
 
-        return false;
+        if (ClassLevel >= requiredClassLevel[1])
+        {
+            PlayerStatus.instance.addPlayerCurrentHP(10);
+            //Debug.Log("hp회복");
+        }
+        else return changeOption;
+
+        if (ClassLevel >= requiredClassLevel[2])
+        {
+            //버프구현해서 따로 빼야됨
+            //PlayerStatus.instance.attackDamage *= 2;
+        }
+        else return changeOption;
+
+        if (ClassLevel >= requiredClassLevel[3])
+        {
+            //밀쳐내기 데미지
+        }
+        else return changeOption;
+
+        if (ClassLevel >= requiredClassLevel[4])
+        {
+            //버프구현해서 따로 빼야됨
+            //PlayerStatus.instance.movementSpeed +=PlayerStatus.instance.basemovementSpeed*0.5f;
+        }
+        else return changeOption;
+
+        if (ClassLevel >= requiredClassLevel[5])
+        {
+
+            //버프구현해서 따로 빼야됨, 이건 파괴타이밍이 실드없어질때임
+            //PlayerStatus.instance.attackSpeed -= PlayerStatus.instance.baseAttackSpeed * 0.3f;
+        }
+
+
+        return changeOption;
     }
 
     // Start is called before the first frame update
     public void SetUp()
     {
-        switch (skillName)
+        if (ClassLevel >= requiredClassLevel[0])
         {
-            case SkillName.CrusaderA:
-                inherenceSkill.overlapAble = true;
-                break;
-
+            overlapAble = true;
         }
+        if (ClassLevel >= requiredClassLevel[3])
+        {
+            Debug.Log("damageon");
+            //밀쳐내기 데미지
+            IronWallDamage = true;
+        }
+
     }
 
     public void SkillCast()
     {
-        switch (skillName)
-        {
-            case SkillName.CrusaderBase:
-                if(inherenceSkill.ShieldCount <1 || inherenceSkill.overlapAble)
-                {
-                    inherenceSkill.ShieldCount += 1;
-                }
-
-                break;
-
+                
+        if(ShieldCount <1 || overlapAble)
+        {     
+            ShieldCount += 1;
+            ironWall.SetActive(true);
         }
+
+
     }
 
     // Update is called once per frame

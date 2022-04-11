@@ -4,13 +4,43 @@ using UnityEngine;
 
 public class IronWall : MonoBehaviour
 {
+    public static IronWall instance=null;
+    //적을 밀쳐내는 스킬(철벽)
     public int attackDamage;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        transform.localScale = new Vector3(transform.localScale.x * PlayerStatus.instance.projectileScale, transform.localScale.y * PlayerStatus.instance.projectileScale, 1);
+    public IndividualSkill parentIndividualSkill;
 
+
+    void singleton()
+    {
+        
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            if (instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        singleton();
+
+        transform.localScale = new Vector3(transform.localScale.x * PlayerStatus.instance.projectileScale, transform.localScale.y * PlayerStatus.instance.projectileScale, 1);
+        parentIndividualSkill = GetComponentInParent<IndividualSkill>();
+
+        if (parentIndividualSkill.IronWallDamage)
+        {
+            Debug.Log("damage!!!");
+            attackDamage = (2 * (10 + Mathf.FloorToInt(PlayerStatus.instance.attackDamage /10)));
+        }
+        //attackDamage = (2 * (10 + Mathf.FloorToInt(PlayerStatus.instance.attackDamage / 10)));
         Destroy(gameObject, 0.2f);
 
     }
@@ -29,4 +59,6 @@ public class IronWall : MonoBehaviour
     {
         attackDamage = dm;
     }
+
+
 }
