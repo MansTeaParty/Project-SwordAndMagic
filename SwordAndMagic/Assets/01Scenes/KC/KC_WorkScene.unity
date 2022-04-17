@@ -5322,37 +5322,61 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4317609028912797798, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
+      propertyPath: MonsterHP
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317609028912797798, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
+      propertyPath: MonsAtckManage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317609028912797798, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
+      propertyPath: MonsterPrivateCoolTime
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7535449741437306266, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
       propertyPath: m_Name
       value: Mon_Tentacle Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 7535449741437306266, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7535449741437306268, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
       propertyPath: m_Color.b
-      value: 0.90525836
+      value: 0.9138536
       objectReference: {fileID: 0}
     - target: {fileID: 7535449741437306268, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.9528302
       objectReference: {fileID: 0}
     - target: {fileID: 7535449741437306268, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
       propertyPath: m_Color.r
-      value: 0.5529412
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535449741437306268, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
+      value: 0.48989856
       objectReference: {fileID: 0}
     - target: {fileID: 7535449741437306269, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
       propertyPath: m_RootOrder
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7535449741437306269, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535449741437306269, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535449741437306269, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535449741437306269, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -56.68451
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 7535449741437306269, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -17.383114
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7535449741437306269, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
       propertyPath: m_LocalPosition.z

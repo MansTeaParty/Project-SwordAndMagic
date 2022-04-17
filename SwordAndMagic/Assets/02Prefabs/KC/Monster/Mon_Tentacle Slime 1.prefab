@@ -61,7 +61,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7535449741437306266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -56.68451, y: -17.383114, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 10}
   m_Children:
   - {fileID: 92916646226722625}
@@ -239,6 +239,7 @@ MonoBehaviour:
   HitEft: {fileID: 940301946638717030, guid: fcafeb082a814314a83134f1e3efaa61, type: 3}
   attackProjectile: {fileID: 248482333223153471, guid: 248e268f71d2e5a43935d4757efccfc9, type: 3}
   RewardBox: {fileID: 42248514509484756, guid: fa251edb20e18ee4ab908e7604d1c634, type: 3}
+  MonsAtckManage: {fileID: 0}
 --- !u!114 &4317609028912797803
 MonoBehaviour:
   m_ObjectHideFlags: 0

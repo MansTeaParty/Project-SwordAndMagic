@@ -205,5 +205,5 @@ MonoBehaviour:
   MonsterExp: 50
   KnockBackPower: 1
   HitEft: {fileID: 940301946638717030, guid: fcafeb082a814314a83134f1e3efaa61, type: 3}
-  attackProjectile: {fileID: 5675334179591625566, guid: dde57a5668914be49ae5075dd276b03d, type: 3}
+  attackProjectile: {fileID: 248482333223153471, guid: 248e268f71d2e5a43935d4757efccfc9, type: 3}
   RewardBox: {fileID: 42248514509484756, guid: fa251edb20e18ee4ab908e7604d1c634, type: 3}

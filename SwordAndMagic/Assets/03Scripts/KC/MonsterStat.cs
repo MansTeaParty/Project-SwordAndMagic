@@ -16,18 +16,18 @@ public class MonsterStat : MonoBehaviour
     public  int     attackDamageForText;         //DamageFontManage.cs에 전달될 텍스트
     private float   AttackCooltime;
 
-    public  bool isDead;
-    private bool isAttack = false;
-    private bool isSuperArmor = false;
+    public  bool    isDead;
+    private bool    isAttack = false;
+    private bool    isSuperArmor = false;
 
-    public int      MonsterHP;
-    public float    AttackRange;
-    public int      MonsterPrivateCoolTime;
-    public int      MonsterDamage;
+    public  int     MonsterHP;
+    public  float   AttackRange;
+    public  int     MonsterPrivateCoolTime;
+    public  int     MonsterDamage;
 
-    public float    MonsterDropRate;
-    public int      MonsterExp;
-    public float    KnockBackPower;    //넉백 정도를 저장할 변수, 일단 1
+    public  float   MonsterDropRate;
+    public  int     MonsterExp;
+    public  float   KnockBackPower;    //넉백 정도를 저장할 변수, 일단 1
 
     //현재 객체와 플레이어 캐릭터 사이의 거리
     private Vector3 toPcVec;
@@ -39,6 +39,8 @@ public class MonsterStat : MonoBehaviour
     private GameObject attackProjectile;
 
     public GameObject RewardBox;
+
+    public GameObject MonsAtckManage;
 
     void Start()
     {
@@ -90,6 +92,11 @@ public class MonsterStat : MonoBehaviour
             //업데이트에 의해 돌진하는 이동처리가 진행
             if (MonsterId == 2)
                 transform.position += toPcVec.normalized * 120.0f * Time.deltaTime;
+
+            if (MonsterId == 4)
+            {
+            }
+        
         }
     }
 
@@ -238,6 +245,7 @@ public class MonsterStat : MonoBehaviour
 
                     case 4:
                         StartCoroutine(Attack_D());
+                        //StartCoroutine(Attack_E());
                         break;
                 }
                 AttackCooltime = MonsterPrivateCoolTime;
@@ -259,8 +267,8 @@ public class MonsterStat : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
 
         toPcVec = new Vector3
-            (TraceTarget.transform.position.x - transform.position.x, 
-             TraceTarget.transform.position.y - transform.position.y, 
+            (TraceTarget.transform.position.x - transform.position.x,
+             TraceTarget.transform.position.y - transform.position.y,
              0);
         
         yield return new WaitForSeconds(0.3f);
@@ -298,7 +306,7 @@ public class MonsterStat : MonoBehaviour
         {
             toPcVec = new Vector3
                (TraceTarget.transform.position.x - transform.position.x,
-                TraceTarget.transform.position.y - transform.position.y, 
+                TraceTarget.transform.position.y - transform.position.y,
                 0);
 
             Quaternion angleAxis1 = Quaternion.Euler(0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x) * Mathf.Rad2Deg);
@@ -328,7 +336,8 @@ public class MonsterStat : MonoBehaviour
         yield return new WaitForSeconds(0.9f);
         toPcVec = new Vector3
             (TraceTarget.transform.position.x - transform.position.x,
-            TraceTarget.transform.position.y - transform.position.y, 0);
+             TraceTarget.transform.position.y - transform.position.y,
+             0);
 
         for (int i = -1; i < 2; i++)
         {
@@ -338,7 +347,10 @@ public class MonsterStat : MonoBehaviour
                 0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x) 
                 * Mathf.Rad2Deg + plusAngle);
 
-            Instantiate(attackProjectile, transform.position, angleAxis);
+            if (!isDead)
+            {
+                Instantiate(attackProjectile, transform.position, angleAxis);
+            }
         }
         yield return new WaitForSeconds(0.1f);
         
@@ -347,6 +359,118 @@ public class MonsterStat : MonoBehaviour
         MonsterMoveSpeed = temp;
 
         yield return new WaitForSeconds(0.5f);
+    }
+
+    IEnumerator Attack_E()
+    {
+        isSuperArmor = true;
+
+        yield return new WaitForSeconds(0.2f);
+        thisAnim.SetTrigger("Attack");
+        thisAnim.SetBool("isDuringAnim", true);
+
+        yield return new WaitForSeconds(0.9f);
+        toPcVec = new Vector3
+            (TraceTarget.transform.position.x - transform.position.x,
+             TraceTarget.transform.position.y - transform.position.y,
+             0);
+
+        //3갈래로 나가는 투사체를 4방향으로 발사 
+        for (int j = 0; j < 4; j++)
+        {
+            float other = j * 90f;
+            for (int i = -1; i < 2; i++)
+            {
+                float plusAngle = i * 15f + other;
+
+                Quaternion angleAxis = Quaternion.Euler(
+                    0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                    * Mathf.Rad2Deg + plusAngle);
+
+                if (!isDead)
+                {
+                    Instantiate(attackProjectile, transform.position, angleAxis);
+                }
+            }
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+
+        //한번에 전 방향으로 발사
+        for (int j = 0; j < 5; j++)
+        {
+            float plusRotate = j * 3f;
+
+            for (int i = 0; i < 18; i++)
+            {
+                float plusAngle = i * 20f;
+                float sum = plusAngle + plusRotate;
+
+                Quaternion angleAxis = Quaternion.Euler(
+                    0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                    * Mathf.Rad2Deg + sum);
+
+                if (!isDead)
+                {
+                    Instantiate(attackProjectile, transform.position, angleAxis);
+                }
+            }
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        ////////////////////////////////
+      
+        
+        // 4방향으로 조금씩 각도를 틀면서 원형으로 투사체를 발사
+        for (int i = 0; i < 40; i++)
+        {
+            float plusAngle1 = i * 10f;
+            float plusAngle2 = i * 10f + 90;
+            float plusAngle3 = i * 10f + 180f;
+            float plusAngle4 = i * 10f + 270f;
+
+            Quaternion angleAxis1 = Quaternion.Euler(
+                0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                * Mathf.Rad2Deg + plusAngle1);
+
+            Quaternion angleAxis2 = Quaternion.Euler(
+               0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+               * Mathf.Rad2Deg + plusAngle2);
+
+            Quaternion angleAxis3 = Quaternion.Euler(
+                0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                * Mathf.Rad2Deg + plusAngle3);
+
+            Quaternion angleAxis4 = Quaternion.Euler(
+               0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+               * Mathf.Rad2Deg + plusAngle4);
+
+            if (!isDead)
+            {
+                Instantiate(attackProjectile, transform.position, angleAxis1);
+                Instantiate(attackProjectile, transform.position, angleAxis2);
+                Instantiate(attackProjectile, transform.position, angleAxis3);
+                Instantiate(attackProjectile, transform.position, angleAxis4);
+            }
+
+            yield return new WaitForSeconds(0.15f);
+        }
+        
+        yield return new WaitForSeconds(0.1f);
+
+        isSuperArmor = false;
+        thisAnim.SetBool("isDuringAnim", false);
+        //MonsterMoveSpeed = temp;
+
+        yield return new WaitForSeconds(0.5f);
+    }
+
+    void Attack_Special()
+    { 
+    
+
     }
 
 

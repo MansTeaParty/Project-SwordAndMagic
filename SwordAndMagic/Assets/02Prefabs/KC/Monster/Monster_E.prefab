@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8070193389499753735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -63.8, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 40, y: 40, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -192,19 +192,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterId: 5
-  MonsterName: Monster_Rat
-  Attack_Type: MeeleMonster
-  Attack_Range: 0
-  AttackCooltime: 0
-  MonsterHP: 50
-  MonsterDamage: 5
+  DamageFont: {fileID: 3895946128422453707, guid: 038f9b9718e550d44b59df653197064f, type: 3}
   MonsterMoveSpeed: 10
+  BaseMonsterMoveSpeed: 0
+  attackDamageForText: 0
+  isDead: 0
+  MonsterHP: 50
+  AttackRange: 0
+  MonsterPrivateCoolTime: 0
+  MonsterDamage: 5
   MonsterDropRate: 100
   MonsterExp: 10
   KnockBackPower: 1
-  DamageFont: {fileID: 3895946128422453707, guid: 038f9b9718e550d44b59df653197064f, type: 3}
-  attackDamageForText: 0
-  isDead: 0
   HitEft: {fileID: 940301946638717030, guid: fcafeb082a814314a83134f1e3efaa61, type: 3}
   attackProjectile: {fileID: 0}
   RewardBox: {fileID: 42248514509484756, guid: fa251edb20e18ee4ab908e7604d1c634, type: 3}
+  MonsAtckManage: {fileID: 0}
