@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class RewardManager : MonoBehaviour
 {
+
     private ItemInfoSet _itemInfoSet;
     //private TestMove _testMove;
     public GameObject RewardUI;
@@ -135,35 +136,35 @@ public class RewardManager : MonoBehaviour
                 switch(h)
                 {
                     case 0:
-                        PlayerStatus.instance.attackDamage += 10;
+                        PlayerStatus.instance.lastingStatus.attackDamage += 10;
                         break;
                     case 1:
-                        PlayerStatus.instance.armorPoint += 1;
+                        PlayerStatus.instance.lastingStatus.armorPoint += 1;
                         break;
                     case 2:
-                        PlayerStatus.instance.attackSpeed += 12.0f;
+                        PlayerStatus.instance.lastingStatus.attackSpeed += 12.0f;
                         break;
                     case 3:
-                        PlayerStatus.instance.maxHP += 10;
+                        PlayerStatus.instance.lastingStatus.maxHP += 10;
                         break;
                     case 4:
-                        PlayerStatus.instance.attackSpeed += 24.0f;
+                        PlayerStatus.instance.lastingStatus.attackSpeed += 24.0f;
                         break;
                     case 5:
-                        PlayerStatus.instance.attackDamage += 20;                            
+                        PlayerStatus.instance.lastingStatus.attackDamage += 20;                            
                         break;
                     case 6:
-                        PlayerStatus.instance.movementSpeed += 1.0f;
+                        PlayerStatus.instance.lastingStatus.movementSpeed += 1.0f;
                         break;
                     case 7:
-                        PlayerStatus.instance.armorPoint += 2;
+                        PlayerStatus.instance.lastingStatus.armorPoint += 2;
                         break;
                     case 8:
-                        PlayerStatus.instance.maxHP += 20;
+                        PlayerStatus.instance.lastingStatus.maxHP += 20;
                         break;
                     case 9:
-                        PlayerStatus.instance.maxHP += 10;
-                        PlayerStatus.instance.armorPoint += 1;
+                        PlayerStatus.instance.lastingStatus.maxHP += 10;
+                        PlayerStatus.instance.lastingStatus.armorPoint += 1;
                         PlayerStatus.instance.addPlayerSpeed(1.0f);
                         break;
                 }
@@ -186,35 +187,35 @@ public class RewardManager : MonoBehaviour
                 switch (h)
                 {
                     case 0:
-                        PlayerStatus.instance.attackDamage += 10;
+                        PlayerStatus.instance.lastingStatus.attackDamage += 10;
                         break;
                     case 1:
-                        PlayerStatus.instance.armorPoint += 1;
+                        PlayerStatus.instance.lastingStatus.armorPoint += 1;
                         break;
                     case 2:
-                        PlayerStatus.instance.attackSpeed += 12.0f;
+                        PlayerStatus.instance.lastingStatus.attackSpeed += 12.0f;
                         break;
                     case 3:
-                        PlayerStatus.instance.maxHP += 10;
+                        PlayerStatus.instance.lastingStatus.maxHP += 10;
                         break;
                     case 4:
-                        PlayerStatus.instance.attackSpeed += 24.0f;
+                        PlayerStatus.instance.lastingStatus.attackSpeed += 24.0f;
                         break;
                     case 5:
-                        PlayerStatus.instance.attackDamage += 20;
+                        PlayerStatus.instance.lastingStatus.attackDamage += 20;
                         break;
                     case 6:
-                        PlayerStatus.instance.movementSpeed += 1.0f;
+                        PlayerStatus.instance.lastingStatus.movementSpeed += 1.0f;
                         break;
                     case 7:
-                        PlayerStatus.instance.armorPoint += 2;
+                        PlayerStatus.instance.lastingStatus.armorPoint += 2;
                         break;
                     case 8:
-                        PlayerStatus.instance.maxHP += 20;
+                        PlayerStatus.instance.lastingStatus.maxHP += 20;
                         break;
                     case 9:
-                        PlayerStatus.instance.maxHP += 10;
-                        PlayerStatus.instance.armorPoint += 1;
+                        PlayerStatus.instance.lastingStatus.maxHP += 10;
+                        PlayerStatus.instance.lastingStatus.armorPoint += 1;
                         PlayerStatus.instance.addPlayerSpeed(1.0f);
                         break;
                 }
@@ -237,35 +238,35 @@ public class RewardManager : MonoBehaviour
                 switch (h)
                 {
                     case 0:
-                        PlayerStatus.instance.attackDamage += 10;
+                        PlayerStatus.instance.lastingStatus.attackDamage += 10;
                         break;
                     case 1:
-                        PlayerStatus.instance.armorPoint += 1;
+                        PlayerStatus.instance.lastingStatus.armorPoint += 1;
                         break;
                     case 2:
-                        PlayerStatus.instance.attackSpeed += 12.0f;
+                        PlayerStatus.instance.lastingStatus.attackSpeed += 12.0f;
                         break;
                     case 3:
-                        PlayerStatus.instance.maxHP += 10;
+                        PlayerStatus.instance.lastingStatus.maxHP += 10;
                         break;
                     case 4:
-                        PlayerStatus.instance.attackSpeed += 24.0f;
+                        PlayerStatus.instance.lastingStatus.attackSpeed += 24.0f;
                         break;
                     case 5:
-                        PlayerStatus.instance.attackDamage += 20;
+                        PlayerStatus.instance.lastingStatus.attackDamage += 20;
                         break;
                     case 6:
-                        PlayerStatus.instance.movementSpeed += 1.0f;
+                        PlayerStatus.instance.lastingStatus.movementSpeed += 1.0f;
                         break;
                     case 7:
-                        PlayerStatus.instance.armorPoint += 2;
+                        PlayerStatus.instance.lastingStatus.armorPoint += 2;
                         break;
                     case 8:
-                        PlayerStatus.instance.maxHP += 20;
+                        PlayerStatus.instance.lastingStatus.maxHP += 20;
                         break;
                     case 9:
-                        PlayerStatus.instance.maxHP += 10;
-                        PlayerStatus.instance.armorPoint += 1;
+                        PlayerStatus.instance.lastingStatus.maxHP += 10;
+                        PlayerStatus.instance.lastingStatus.armorPoint += 1;
                         PlayerStatus.instance.addPlayerSpeed(1.0f);
 
                         break;

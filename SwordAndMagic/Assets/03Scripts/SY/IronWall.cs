@@ -37,8 +37,8 @@ public class IronWall : MonoBehaviour
 
         if (parentIndividualSkill.IronWallDamage)
         {
-            Debug.Log("damage!!!");
-            attackDamage = (2 * (10 + Mathf.FloorToInt(PlayerStatus.instance.attackDamage /10)));
+            //Debug.Log("damage!!!");
+            attackDamage = (2 * (10 + Mathf.FloorToInt(PlayerStatus.instance.getAttackDamage() /10)));
         }
         //attackDamage = (2 * (10 + Mathf.FloorToInt(PlayerStatus.instance.attackDamage / 10)));
         Destroy(gameObject, 0.2f);

@@ -9,7 +9,7 @@ using UnityEngine;
 
 //상속을 안받고 이렇게 한 이유는 스킬이 가짓수가 너무 많으면 힘들 수 있어서. 성능이 너무 떨어질것같으면 밑줄과 함께 자식클래스로 분리할 수 있을 것.
 //스킬을 레벨이 아니라 하나의 스킬이 레벨을 가지게 하면 더 좋을 것 같은데.... 그러면 inherence에 있는 변수들도 이쪽으로 가져올 수 있음
-//
+//나중에 크루세이더 내용을 하위클래스로 빼야할듯
 
 public class IndividualSkill : MonoBehaviour
 {
@@ -17,10 +17,11 @@ public class IndividualSkill : MonoBehaviour
     public InherenceSkill inherenceSkill;
 
     public int ClassLevel = 1;
-    public int[] requiredClassLevel = new int[]{1,2,3,4,5,6};
+    public int[] requiredClassLevel = new int[]{1,2,3,4,5,6};//스킬요구레벨
     
     public bool Option_Damaged = false; //플레이어의 기본 데미지 기믹을 대체하는가
 
+    public BuffManager buffManager;
 
     [Header("Crusaders")]
     public bool overlapAble = false;//방어수 중첩가능여부
@@ -29,6 +30,12 @@ public class IndividualSkill : MonoBehaviour
     public GameObject ironWallKnockBack;
     public bool IronWallDamage = false;
 
+
+
+    [Header("Buffs")]//각각을 만드는게 아니라 그냥 각 스킬레벨별로 배열을 쭉 만들고 ==null을 붙이고 안붙이고로 정하면 좋을 것 같음
+    public GameObject ironWallMS_Buff = null;
+    public GameObject ironWallAS_Buff=null;//ironwall이 활성화된 상태에서 계속 부여되는 버프
+    
 
     public enum SkillName
     {
@@ -44,6 +51,10 @@ public class IndividualSkill : MonoBehaviour
     {
         inherenceSkill = GetComponentInParent<InherenceSkill>();
         ClassLevel = PlayerStatus.instance.classLevel;
+        if (ShieldCount >= 1)
+        {
+            ironWallAS_Buff = buffManager.BuffToPlayer(new CustomStatus(0, 0, 0, 0, 0, (PlayerStatus.instance.lastingStatus.attackSpeed * -0.3f), 0), float.MaxValue);
+        }
     }
 
     public bool Damaged()
@@ -52,20 +63,24 @@ public class IndividualSkill : MonoBehaviour
 
         if (true)
         {
-            if (ShieldCount > 0)
+            if (ShieldCount <= 0)
             {
-                
+                ironWall.SetActive(false);
+            }
+            else if (ShieldCount > 0)
+            {
+
+                changeOption = true;
                 if (IronWall.instance == null)
                 {
                     ShieldCount--;
                     Instantiate(ironWallKnockBack, transform.position, transform.rotation, transform);
+                    
                 }
-                if(ShieldCount<=0)
-                {
-                    ironWall.SetActive(false);
-                }
+                else return true;//실드발동중이면 아래의 버프들은 생기지 않음
+
                 //Instantiate(ironWall, transform, false);
-                changeOption = true;
+
             }
         }
         
@@ -76,14 +91,17 @@ public class IndividualSkill : MonoBehaviour
         if (ClassLevel >= requiredClassLevel[1])
         {
             PlayerStatus.instance.addPlayerCurrentHP(10);
+
             //Debug.Log("hp회복");
         }
         else return changeOption;
 
         if (ClassLevel >= requiredClassLevel[2])
         {
-            //버프구현해서 따로 빼야됨
+            Debug.Log("공격력 상승");
             //PlayerStatus.instance.attackDamage *= 2;
+            buffManager.BuffToPlayer(new CustomStatus(0, 0, 0, 0, 10, 0, 0), 3.0f * PlayerStatus.instance.duration);
+
         }
         else return changeOption;
 
@@ -96,15 +114,21 @@ public class IndividualSkill : MonoBehaviour
         if (ClassLevel >= requiredClassLevel[4])
         {
             //버프구현해서 따로 빼야됨
+            if (ironWallMS_Buff == null)
+            {
+                ironWallMS_Buff=buffManager.BuffToPlayer(new CustomStatus(0, 0, 0, 0, 0, 0, PlayerStatus.instance.lastingStatus.movementSpeed * 0.5f), 2.0f * PlayerStatus.instance.duration);
+            }
             //PlayerStatus.instance.movementSpeed +=PlayerStatus.instance.basemovementSpeed*0.5f;
         }
         else return changeOption;
 
         if (ClassLevel >= requiredClassLevel[5])
         {
-
-            //버프구현해서 따로 빼야됨, 이건 파괴타이밍이 실드없어질때임
-            //PlayerStatus.instance.attackSpeed -= PlayerStatus.instance.baseAttackSpeed * 0.3f;
+            if (ironWallAS_Buff != null && ShieldCount == 0)
+            {
+                Destroy(ironWallAS_Buff.GetComponent<GameObject>());
+                ironWallAS_Buff = null;
+            }
         }
 
 
@@ -133,6 +157,11 @@ public class IndividualSkill : MonoBehaviour
         if(ShieldCount <1 || overlapAble)
         {     
             ShieldCount += 1;
+            if(ironWallAS_Buff==null)
+            {
+                Debug.Log("공속업");
+                ironWallAS_Buff = buffManager.BuffToPlayer(new CustomStatus(0, 0, 0, 0, 0, PlayerStatus.instance.lastingStatus.attackSpeed * -0.3f, 0), float.MaxValue);
+            }
             ironWall.SetActive(true);
         }
 

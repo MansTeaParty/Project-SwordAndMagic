@@ -89,7 +89,7 @@ public class PlayerCtrl : MonoBehaviour
         playerStatus = GetComponentInChildren<PlayerStatus>();
         inherenceSkill = GetComponentInChildren<InherenceSkill>();
 
-        HP_Bar.maxValue = playerStatus.maxHP;
+        HP_Bar.maxValue = playerStatus.getMaxHP();
         HP_Bar.value = currentHP;
         HP_Text.text = "HP : " + currentHP;
         //StartCoroutine("BaseAttack");
@@ -137,7 +137,7 @@ public class PlayerCtrl : MonoBehaviour
         //tr.TransformDirection(tr.position + (Vector3)moveVec);
         if (Moveable&&!isDie)
         {
-            tr.position += (Vector3)moveVec * moveSpeed * Time.deltaTime;
+            tr.position += (Vector3)moveVec * /*moveSpeed*/playerStatus.getPlayerSpeed() * Time.deltaTime;
             anim.SetInteger("Horizontal", h);
             anim.SetInteger("Vertical", v);
 
@@ -219,7 +219,7 @@ public class PlayerCtrl : MonoBehaviour
     {
 
         Attackable = false;
-        if(playerStatus.addPlayerCurrentMP(playerStatus.MPregen))
+        if (playerStatus.addPlayerCurrentMP(playerStatus.getMP_Regen()))
         {
             activeInherenceSkill();
         }
@@ -227,7 +227,7 @@ public class PlayerCtrl : MonoBehaviour
         //anim.SetBool("isAttack", true);
         //anim.SetTrigger("Attack");
         Instantiate(normalAttackProjectile, FirePos.transform.position, FirePosPivot.transform.rotation);
-        yield return new WaitForSeconds(playerStatus.attackSpeed);
+        yield return new WaitForSeconds(playerStatus.getAttackSpeed());
         Attackable = true;
 
         
@@ -246,7 +246,7 @@ public class PlayerCtrl : MonoBehaviour
 
     #endregion
 
-    void OnTriggerStay2D(Collider2D other) //before OnTriggerStay2D OnTriggerEnter2D
+    void OnTriggerEnter2D(Collider2D other) //before OnTriggerStay2D OnTriggerEnter2D
     {
         if (other.tag == "Enemy")
         {
