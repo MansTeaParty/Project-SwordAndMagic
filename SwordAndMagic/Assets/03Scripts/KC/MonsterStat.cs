@@ -11,9 +11,9 @@ public class MonsterStat : MonoBehaviour
     private SpriteRenderer  ThisSpriteRenderer; 
     private Animator        thisAnim;
 
-    public  float   MonsterMoveSpeed;
-    public  float   BaseMonsterMoveSpeed;
-    public  int     attackDamageForText;         //DamageFontManage.cs에 전달될 텍스트
+    public  float   MonsterMoveSpeed;           // 현재 몬스터 이동속도
+    public  float   BaseMonsterMoveSpeed;       // 기본 이동속도 속성 값
+    public  int     attackDamageForText;        // DamageFontManage.cs에 전달될 텍스트
     private float   AttackCooltime;
 
     public  bool    isDead;
@@ -93,10 +93,6 @@ public class MonsterStat : MonoBehaviour
             if (MonsterId == 2)
                 transform.position += toPcVec.normalized * 120.0f * Time.deltaTime;
 
-            if (MonsterId == 4)
-            {
-            }
-        
         }
     }
 
@@ -137,7 +133,6 @@ public class MonsterStat : MonoBehaviour
         MonsterMoveSpeed = temp;
 
         isMonsterHPzero();
-
     }
 
     IEnumerator MakeDamageFont()
@@ -261,7 +256,7 @@ public class MonsterStat : MonoBehaviour
     {
         isSuperArmor = true;
         thisAnim.SetTrigger("Ready");
-        float temp = MonsterMoveSpeed;
+        float temp = BaseMonsterMoveSpeed;
         MonsterMoveSpeed = 0.0f;
 
         yield return new WaitForSeconds(0.7f);
@@ -282,7 +277,11 @@ public class MonsterStat : MonoBehaviour
         isSuperArmor = false;
         isAttack = false;
         thisAnim.SetBool("isDuringAnim", false);
-        MonsterMoveSpeed = temp;
+
+        if(!isDead)
+        { MonsterMoveSpeed = temp; }
+        else
+        { MonsterMoveSpeed = 0.0f; }
 
         yield return new WaitForSeconds(0.5f);
     }
@@ -291,11 +290,10 @@ public class MonsterStat : MonoBehaviour
     //Spiked슬라임 공격 절차
     IEnumerator Attack_C() 
     {
-        float temp = MonsterMoveSpeed;
+        isSuperArmor = true;
+        float temp = BaseMonsterMoveSpeed;
         MonsterMoveSpeed = 0.0f;
 
-        isSuperArmor = true;
-        
         yield return new WaitForSeconds(0.2f);
 
         thisAnim.SetTrigger("Attack");
@@ -316,7 +314,11 @@ public class MonsterStat : MonoBehaviour
 
         isSuperArmor = false;
         thisAnim.SetBool("isDuringAnim", false);
-        MonsterMoveSpeed = temp;
+
+        if (!isDead)
+        { MonsterMoveSpeed = temp; }
+        else
+        { MonsterMoveSpeed = 0.0f; }
 
         yield return new WaitForSeconds(0.5f);
     }
@@ -324,10 +326,9 @@ public class MonsterStat : MonoBehaviour
     //Tentacle 슬라임 공격 절차
     IEnumerator Attack_D()
     {
-        float temp = MonsterMoveSpeed;
-        MonsterMoveSpeed = 0.0f;
-
         isSuperArmor = true;
+        float temp = BaseMonsterMoveSpeed;
+        MonsterMoveSpeed = 0.0f;
 
         yield return new WaitForSeconds(0.2f);
         thisAnim.SetTrigger("Attack");
@@ -356,7 +357,12 @@ public class MonsterStat : MonoBehaviour
         
         isSuperArmor = false;
         thisAnim.SetBool("isDuringAnim", false);
-        MonsterMoveSpeed = temp;
+
+        if (!isDead)
+        { MonsterMoveSpeed = temp; }
+        //특수 공격중 몬스터가 사망했을 경우
+        else
+        { MonsterMoveSpeed = 0.0f; }
 
         yield return new WaitForSeconds(0.5f);
     }
@@ -364,6 +370,8 @@ public class MonsterStat : MonoBehaviour
     IEnumerator Attack_E()
     {
         isSuperArmor = true;
+        float temp = MonsterMoveSpeed;
+        MonsterMoveSpeed = 0.0f;
 
         yield return new WaitForSeconds(0.2f);
         thisAnim.SetTrigger("Attack");
@@ -462,16 +470,15 @@ public class MonsterStat : MonoBehaviour
 
         isSuperArmor = false;
         thisAnim.SetBool("isDuringAnim", false);
-        //MonsterMoveSpeed = temp;
+
+        if (!isDead)
+        { MonsterMoveSpeed = temp; }
+        else
+        { MonsterMoveSpeed = 0.0f; }
 
         yield return new WaitForSeconds(0.5f);
     }
 
-    void Attack_Special()
-    { 
-    
-
-    }
 
 
     void GiveExpToPlayer()

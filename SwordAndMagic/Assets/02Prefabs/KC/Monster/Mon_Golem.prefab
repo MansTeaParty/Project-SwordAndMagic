@@ -194,7 +194,7 @@ MonoBehaviour:
   MonsterId: 2
   DamageFont: {fileID: 3895946128422453707, guid: 038f9b9718e550d44b59df653197064f, type: 3}
   MonsterMoveSpeed: 8
-  BaseMonsterMoveSpeed: 0
+  BaseMonsterMoveSpeed: 8
   attackDamageForText: 0
   isDead: 0
   MonsterHP: 150
@@ -207,3 +207,4 @@ MonoBehaviour:
   HitEft: {fileID: 940301946638717030, guid: fcafeb082a814314a83134f1e3efaa61, type: 3}
   attackProjectile: {fileID: 0}
   RewardBox: {fileID: 42248514509484756, guid: fa251edb20e18ee4ab908e7604d1c634, type: 3}
+  MonsAtckManage: {fileID: 0}

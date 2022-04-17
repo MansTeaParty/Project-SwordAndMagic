@@ -12,6 +12,7 @@ public class MonsterPoolCtrl : MonoBehaviour
     public GameObject Monster_A;
     public GameObject Monster_B;
     public GameObject Monster_C;
+    public GameObject Monster_D;
 
     private bool SpawnApprove; //생성해도 된다는 승인 변수
 
@@ -19,8 +20,7 @@ public class MonsterPoolCtrl : MonoBehaviour
     public int SpawnValue_A;
     public int SpawnValue_B;
     public int SpawnValue_C;
-
-    private int Stage_num;
+    public int SpawnValue_D;
 
     private GameObject MonsterManager;
 
@@ -90,16 +90,23 @@ public class MonsterPoolCtrl : MonoBehaviour
                 Mons_C.transform.SetParent(MonsterManager.transform, false); 
                 yield return new WaitForSeconds(1f);
             }
+            for (int i = 0; i < SpawnValue_D; i++)
+            {
+                GameObject Mons_D = Instantiate(Monster_D, GetRandomPosition(), Quaternion.identity);
+                Mons_D.transform.SetParent(MonsterManager.transform, false);
+                yield return new WaitForSeconds(1f);
+            }
+
 
             //Destroy(gameObject);
             //지우면 플레이 했을 때 리스트대로 나오는지 확인가능
             //활성화 하면 몬스터 풀에 할당된 모든 몬스터가 다 소환 완료 되면 
             //객체 스스로 지워짐
-
         }
     }
 
     //스폰할 위치 결정
+    //플레이어 위치 기준 타원형으로 스폰
     public Vector3 GetRandomPosition()
     {
         float radius = 140f;

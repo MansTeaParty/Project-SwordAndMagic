@@ -6,34 +6,33 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject GameOverUI;
+    public GameObject   GameOverUI;
 
-
-    public GameObject TimeLineController;//타임라인 컨트롤러
-    public GameObject SelectingTimeLine; //선택된 타임라인
+    public GameObject   TimeLineController;   // 타임라인 컨트롤러
+    public GameObject   SelectingTimeLine;    // 선택된 타임라인
 
     private bool isSpawnAble;
-
-    private int StageNum;
-
     private bool isGameStart;
     private bool isGameOver;
 
     //시간 설정
-    public int setTime=180;
-    public int SetSpawnPoolTime=30;
-    private float currentTime; // wave 카운트를 세기 위한 시간변수
-    private float remainTime; // UI에 남은 시간 보여주는 변수
-    private int waveCount;
+    public  int     setTimeMinute       = 15;
+    public  int     setTimeSecond       = 60;
+    public  int     SetSpawnPoolTime    = 30;
+
+    private float   currentTimeSecond;  // 초
+    private int     currentTimeMinute;  // 분
+    public  Text    TimeText;           
 
     void Start()
     {
         isGameOver = false;
         isGameStart = true;
 
-        currentTime = 0;
-        //remainTime = setTime; //180초
-        waveCount = 1;
+        // 15분 1초에서 시작 -> 30초 단위로 몬스터 풀이 생성되기 위해
+        // 15분 0초에서 시작하면 바로 59초가 되버림 -> 첫번째 몬스터 풀 안나오고 30초 뒤에나 나옴.
+        currentTimeMinute = setTimeMinute;
+        currentTimeSecond = 1;
 
         TimeLineController = GameObject.FindGameObjectWithTag("TimeLineController");
         // 타임라인 컨트롤러에게 타임라인을 선택할 것을 지시
@@ -43,36 +42,61 @@ public class GameManager : MonoBehaviour
         TimeLineController.GetComponent<TimeLineController>().SelectTimeLine();
 
         isSpawnAble = true;
-        StageNum = 1;
+
+        StartCoroutine((Timer()));
     }
-
-
 
     void Update()
+    {}
+
+    #region Timer
+    void ShowTimeText()
     {
-        TimeCal();
-    }
+        TimeText.color = new Color(255, 255, 255);
 
-
-
-    #region TimeLine
-
-    void TimeCal()
-    {
-        //currentTime을 시간에 따라 + 시킴
-        currentTime += Time.deltaTime;
-        //Debug.Log("현재 시간 : " + (int)currentTime);
-
-        //몇 배수일 때 -> SetSpawnPoolTime초 마다
-        //문제점 : 1초동안 실행되는 문장이라는 것
-        //update로 엄청나게 많이 호출 하기 때문에 
-        //TimeLine.cs의 몬스터 풀 리스트 인덱스 값이 덩달아 올라감.
-        if ((int)currentTime % SetSpawnPoolTime == 0 && isSpawnAble == true)
+        if (currentTimeMinute < 10)
         {
-            StartCoroutine(SpawnCool());
+            TimeText.text = "0" + currentTimeMinute + " : " + currentTimeSecond;
+
+            if (currentTimeSecond < 10)
+            {
+                TimeText.text ="0" + currentTimeMinute + " : " + "0" + currentTimeSecond;
+            }
+        }
+        else
+        {
+            TimeText.text = currentTimeMinute + " : " + currentTimeSecond;
+
+            if (currentTimeSecond < 10)
+            {
+                TimeText.text = currentTimeMinute + " : " + "0" + currentTimeSecond;
+            }
         }
     }
 
+    IEnumerator Timer()
+    {
+        if (currentTimeSecond == 0f)
+        {
+            currentTimeMinute -= 1;             // 분 -1
+            currentTimeSecond = setTimeSecond;  // 초는 다시 60초로
+        }
+
+        currentTimeSecond -= 1f;
+
+        ShowTimeText();
+
+        yield return new WaitForSeconds(1.0f);
+
+        if ((int)currentTimeSecond % SetSpawnPoolTime == 0 && isSpawnAble == true)
+        {
+            StartCoroutine(SpawnCool());
+        }
+
+        StartCoroutine(Timer());
+
+    }
+    #endregion
 
     //타임라인 컨트롤러가 호출하여 정해진 타임라인이 무엇인지 받아옴. 
     public void RecieveTimeLine(GameObject timeline)
@@ -94,10 +118,7 @@ public class GameManager : MonoBehaviour
         isSpawnAble = true;
     }
 
-    #endregion
-
-
-
+   
     #region GameOverUI
     //---(GameOverUI)----
 

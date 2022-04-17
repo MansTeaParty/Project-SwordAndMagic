@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class TimeLine : MonoBehaviour
 {
-    public GameObject TimeLineCtrler;
-
     public List<GameObject> MonsterPoolSettingList;
     public GameObject NowSpawnPool; 
 
@@ -13,7 +11,6 @@ public class TimeLine : MonoBehaviour
     public int poolNum;
     void Start()
     {
-        //TimeLineCtrler = GameObject.FindGameObjectWithTag("TimeLineController");
         isNextPool = false;
     }
 
@@ -36,7 +33,7 @@ public class TimeLine : MonoBehaviour
 
     void PoolControl()
     {
-        GameObject MonsterPool_ABC = Instantiate(NowSpawnPool, this.transform.position, Quaternion.identity);
+        GameObject MonsterPool_ABC = Instantiate(NowSpawnPool, new Vector3(0,0,0), Quaternion.identity);
         MonsterPool_ABC.transform.SetParent(this.transform, false);
     }
 }

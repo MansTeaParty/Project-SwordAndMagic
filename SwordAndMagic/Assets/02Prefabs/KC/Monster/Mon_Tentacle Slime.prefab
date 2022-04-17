@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4317609028912797798}
   - component: {fileID: 4317609028912797803}
   m_Layer: 0
-  m_Name: Mon_Tentacle Slime 1
+  m_Name: Mon_Tentacle Slime
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 7535449741437306266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 10}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children:
   - {fileID: 92916646226722625}
   m_Father: {fileID: 0}
@@ -109,7 +109,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 5080791554940634584, guid: 0bfe24995354b0048902b0eea8e887df, type: 3}
-  m_Color: {r: 0.5529412, g: 1, b: 0.90525836, a: 1}
+  m_Color: {r: 0.48989856, g: 0.9528302, b: 0.9138536, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -226,7 +226,7 @@ MonoBehaviour:
   MonsterId: 4
   DamageFont: {fileID: 3895946128422453707, guid: 038f9b9718e550d44b59df653197064f, type: 3}
   MonsterMoveSpeed: 10
-  BaseMonsterMoveSpeed: 0
+  BaseMonsterMoveSpeed: 10
   attackDamageForText: 0
   isDead: 0
   MonsterHP: 120
