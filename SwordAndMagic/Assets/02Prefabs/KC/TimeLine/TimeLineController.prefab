@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5889563194519100901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5889563194519100896}
+  - component: {fileID: 5889563194519100903}
+  - component: {fileID: 5889563194519100902}
+  m_Layer: 0
+  m_Name: TimeLineController
+  m_TagString: TimeLineController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5889563194519100896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5889563194519100901}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5889563194519100903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5889563194519100901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07394858325a52a438c39a771ffc73a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TraceVelocity: {x: 0, y: 0}
+  Target: {fileID: 0}
+  ReactTime: 0
+--- !u!114 &5889563194519100902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5889563194519100901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a99326054f41541b73a904fb5ff3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeLine_A: {fileID: 6463606341838953361, guid: bbe7b4996a954cb4e8848d8cab44c5ed, type: 3}
+  TimeLine_B: {fileID: 3552398834530123212, guid: 68e4658890e09844eaf015a20b159ff2, type: 3}
+  CurrentTimeLine: {fileID: 0}
