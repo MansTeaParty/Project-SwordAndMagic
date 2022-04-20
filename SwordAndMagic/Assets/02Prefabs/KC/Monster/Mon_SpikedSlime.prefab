@@ -197,14 +197,16 @@ MonoBehaviour:
   BaseMonsterMoveSpeed: 10
   attackDamageForText: 0
   isDead: 0
+  isTrans: 0
   MonsterHP: 100
   AttackRange: 80
   MonsterPrivateCoolTime: 6
   MonsterDamage: 7
-  MonsterDropRate: 150
   MonsterExp: 50
+  MonsterDropRate: 150
   KnockBackPower: 1
   HitEft: {fileID: 940301946638717030, guid: fcafeb082a814314a83134f1e3efaa61, type: 3}
   attackProjectile: {fileID: 248482333223153471, guid: 248e268f71d2e5a43935d4757efccfc9, type: 3}
   RewardBox: {fileID: 42248514509484756, guid: fa251edb20e18ee4ab908e7604d1c634, type: 3}
+  Mimic: {fileID: 8391641586692204741, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
   MonsAtckManage: {fileID: 0}

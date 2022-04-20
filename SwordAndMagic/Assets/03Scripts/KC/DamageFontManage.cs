@@ -49,11 +49,11 @@ public class DamageFontManage : MonoBehaviour
         upSpeed = 0.0f;
         for (int i = 0; i < 10; i++)
         {
-            upSpeed += 0.8f;// 폰트가 출력되면 서서히 올라가면서
+            upSpeed += 0.8f; // 폰트가 출력되면 서서히 올라가면서
+                             // 폰트의 스케일 값을 증가 -> 폰트가 점점 커지는 효과
             if (i < 3)
             {
-                //폰트의 스케일 값을 증가 -> 폰트가 점점 커지는 효과
-                float scale = 0.0f;
+                float scale = 0f;
                 if (monsterid == 1) //박쥐
                 {
                     scale = 0.0008f;
@@ -69,6 +69,10 @@ public class DamageFontManage : MonoBehaviour
                 if (monsterid == 4) // Tentacle 슬라임
                 {
                     scale = 0.0007f;
+                }
+                if (monsterid == 5) // 미믹
+                {
+                    scale = 0.001f;
                 }
 
                 transform.localScale += new Vector3(scale, scale, 0.001f);

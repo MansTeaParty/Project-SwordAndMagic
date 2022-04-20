@@ -22,17 +22,22 @@ public class GameManager : MonoBehaviour
 
     private float   currentTimeSecond;  // 초
     private int     currentTimeMinute;  // 분
-    public  Text    TimeText;           
+    public  Text    TimeText;
+    public  Text    PoolText;
 
     void Start()
     {
         isGameOver = false;
         isGameStart = true;
 
+        PoolText.enabled = false;
+
         // 15분 1초에서 시작 -> 30초 단위로 몬스터 풀이 생성되기 위해
         // 15분 0초에서 시작하면 바로 59초가 되버림 -> 첫번째 몬스터 풀 안나오고 30초 뒤에나 나옴.
         currentTimeMinute = setTimeMinute;
         currentTimeSecond = 1;
+
+        StartCoroutine((Timer()));
 
         TimeLineController = GameObject.FindGameObjectWithTag("TimeLineController");
         // 타임라인 컨트롤러에게 타임라인을 선택할 것을 지시
@@ -42,8 +47,6 @@ public class GameManager : MonoBehaviour
         TimeLineController.GetComponent<TimeLineController>().SelectTimeLine();
 
         isSpawnAble = true;
-
-        StartCoroutine((Timer()));
     }
 
     void Update()
@@ -101,8 +104,7 @@ public class GameManager : MonoBehaviour
     //타임라인 컨트롤러가 호출하여 정해진 타임라인이 무엇인지 받아옴. 
     public void RecieveTimeLine(GameObject timeline)
     {
-        SelectingTimeLine = timeline;  
-        
+        SelectingTimeLine = timeline;
     }
 
     //알아낸 SelectingTimeLine에게 일정시간마다 다음 몬스터 풀을 생성할 것을 전달
@@ -113,8 +115,12 @@ public class GameManager : MonoBehaviour
         //TimeLine.cs의 NextPool 함수호출
         SelectingTimeLine.GetComponent<TimeLine>().NextPool();
 
+        PoolText.enabled = true;
+        yield return new WaitForSeconds(2f);
+        PoolText.enabled = false;
+
         //SetSpawnPoolTime(30초) 동안 대기
-        yield return new WaitForSeconds(SetSpawnPoolTime);
+        yield return new WaitForSeconds(SetSpawnPoolTime - 2f);
         isSpawnAble = true;
     }
 

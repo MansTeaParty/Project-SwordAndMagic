@@ -28,17 +28,12 @@ public class MonsterPoolCtrl : MonoBehaviour
     {
         MonsterManager = GameObject.FindGameObjectWithTag("MonsterManager");
         SpawnApprove = true;
+
+        MonsterPoolCheck();
     }
 
     void Update()
     {
-        if (SpawnApprove == true)
-        {
-            for (int i = 0; i < 1; i++) //한번만 콜
-            {
-                MonsterPoolCheck();
-            }
-        }
     }
 
     void MonsterPoolCheck()
