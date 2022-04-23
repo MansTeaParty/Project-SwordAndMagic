@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterPool_State: 2
-  Monster_A: {fileID: 8398390274278244733, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
-  Monster_B: {fileID: 370152872527989858, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
-  Monster_C: {fileID: 8543551665867676290, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
+  Monster_A: {fileID: 8398390274278244733, guid: e3ff8686c9a91fc4ab9c6a422eb9bf58, type: 3}
+  Monster_B: {fileID: 370152872527989858, guid: 0209823a84a435643b0c2ee34acb4bc5, type: 3}
+  Monster_C: {fileID: 8543551665867676290, guid: 911b3908f5ea4aa43b0a7c254cbcbf6f, type: 3}
+  Monster_D: {fileID: 7535449741437306266, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
   SpawnValue_A: 12
-  SpawnValue_B: 0
+  SpawnValue_B: 2
   SpawnValue_C: 0
+  SpawnValue_D: 2
