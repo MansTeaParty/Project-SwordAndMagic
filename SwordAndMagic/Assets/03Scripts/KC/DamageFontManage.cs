@@ -24,7 +24,7 @@ public class DamageFontManage : MonoBehaviour
 
         monsterid = GetComponentInParent<MonsterStat>().MonsterId;
 
-        if (type == "Monster")
+        if (type == "Enemy")
         {
             text.text = transform.parent.GetComponent<MonsterStat>().attackDamageForText.ToString();
             //text.text = "<color=red>" + textValue + "</color>";

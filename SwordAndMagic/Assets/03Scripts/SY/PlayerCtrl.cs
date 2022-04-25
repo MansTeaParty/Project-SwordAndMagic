@@ -32,7 +32,7 @@ public class PlayerCtrl : MonoBehaviour
     private Rigidbody2D rigid;
     private Vector3 currPos;
     public Vector2 moveVec;
-    public float moveSpeed = 1.0f;
+    public float moveSpeed = 1.0f;  //여기서 설정하면 안되고 lastingStatus에서 설정해야됨
     private bool Moveable = true;   /// 평상 시의 이동. 구르는 동안 이동을 입력받지 않기 위함. 
 
 

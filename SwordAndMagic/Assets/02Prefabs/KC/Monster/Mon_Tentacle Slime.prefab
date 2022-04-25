@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 4317609028912797803}
   m_Layer: 0
   m_Name: Mon_Tentacle Slime
-  m_TagString: Monster
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,7 +241,6 @@ MonoBehaviour:
   attackProjectile: {fileID: 248482333223153471, guid: 248e268f71d2e5a43935d4757efccfc9, type: 3}
   RewardBox: {fileID: 42248514509484756, guid: fa251edb20e18ee4ab908e7604d1c634, type: 3}
   Mimic: {fileID: 8391641586692204741, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
-  MonsAtckManage: {fileID: 0}
 --- !u!114 &4317609028912797803
 MonoBehaviour:
   m_ObjectHideFlags: 0

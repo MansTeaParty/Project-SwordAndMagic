@@ -44,7 +44,7 @@ public class BaseAttack : MonoBehaviour
         //Debug.Log(collision.ToString());if (hit == false)
         {
             hit = true;
-            if (collision.gameObject.tag == "Monster")
+            if (collision.gameObject.tag == "Enemy")
             {
                 if (penetration > 0)
                 {
