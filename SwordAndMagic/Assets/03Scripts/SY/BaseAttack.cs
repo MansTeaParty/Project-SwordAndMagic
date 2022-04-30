@@ -56,7 +56,7 @@ public class BaseAttack : MonoBehaviour
                         penetration -= 1;      //몬스터 스크립트에 데미지와 넉백거리를 전달하며 몬스터 피격처리 실행//
                         //collision.gameObject.GetComponent<MonsterAI>().Hit(this.gameObject, attackDamage, knockBack);
 
-                        collision.GetComponent<MonsterStat>().Hit(attackDamage);
+                        collision.GetComponent<MonsterCtrl>().Hit(attackDamage);
                         if (penetration <= 0)
                         {
                             Destroy(this.gameObject);

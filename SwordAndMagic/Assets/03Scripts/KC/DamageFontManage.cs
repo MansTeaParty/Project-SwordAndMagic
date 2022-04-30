@@ -22,11 +22,11 @@ public class DamageFontManage : MonoBehaviour
 
         transform.localScale = transform.localScale / transform.parent.gameObject.transform.localScale.x;
 
-        monsterid = GetComponentInParent<MonsterStat>().MonsterId;
+        monsterid = GetComponentInParent<MonsterCtrl>().MonsterId;
 
         if (type == "Enemy")
         {
-            text.text = transform.parent.GetComponent<MonsterStat>().attackDamageForText.ToString();
+            text.text = transform.parent.GetComponent<MonsterCtrl>().attackDamageForText.ToString();
             //text.text = "<color=red>" + textValue + "</color>";
             text.color = new Color(255, 0, 0);
 

@@ -50,7 +50,7 @@ public class IronWall : MonoBehaviour
         //Debug.Log(collision.ToString());
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.GetComponent<MonsterStat>().Hit(attackDamage);
+            collision.GetComponent<MonsterCtrl>().Hit(attackDamage);
         }
     }
 
