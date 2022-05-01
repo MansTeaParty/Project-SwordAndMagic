@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class IceShotScript : MonoBehaviour
+{
+    private int projectileSpeed = 3;
+    [SerializeField]
+    private int Penetration;
+    [SerializeField]
+    private GameObject Enemy;
+
+    private int Damage;
+    private float Freeze;
+    private Vector2 MonsterVelocity;
+    private bool Icebool;
+
+    private ItemInfoSet _itemInfoSet;
+
+    float angle;
+    Vector2 target, mouse;
+    private void Start()
+    {
+        _itemInfoSet = GameObject.Find("ItemList").GetComponent<ItemInfoSet>();
+        Enemy = GameObject.FindWithTag("Enemy");
+            
+        target = transform.position;
+        mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        angle = Mathf.Atan2(mouse.y - target.y, mouse.x - target.x) * Mathf.Rad2Deg;
+
+        Damage = _itemInfoSet.Items[15].Damage;
+        Freeze = _itemInfoSet.Items[15].CoolTime1;
+        Penetration = _itemInfoSet.Items[15].Penetration;
+        this.transform.localScale = _itemInfoSet.Items[15].Size;
+        MonsterVelocity = Enemy.GetComponent<Rigidbody2D>().velocity;        
+    }
+    private void FixedUpdate()
+    {
+        this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.Translate(Vector2.right * projectileSpeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {          
+            Penetration -= 1;
+            if (Penetration == 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }    
+    
+    void OnBecameInvisible()//화면밖으로 나갈때
+    {
+        Destroy(this.gameObject);//총알 파괴
+    }
+}

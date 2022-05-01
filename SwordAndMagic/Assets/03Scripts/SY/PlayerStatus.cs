@@ -58,6 +58,7 @@ public class PlayerStatus : MonoBehaviour
 
 
     public int playerEXP;
+    public int playerSP = 0;
 
     void Awake()
     {
@@ -74,12 +75,9 @@ public class PlayerStatus : MonoBehaviour
 
     }
 
-    public void addPlayerSpeed(float newSpeed)  //플레이어 스탯 변화에 추가작업이 필요한 경우 함수생성
-    {
-        Player.moveSpeed = lastingStatus.movementSpeed += newSpeed;
-        //Player.moveSpeed = movementSpeed;
-    }
 
+
+    #region Adder
     public void addPlayerCurrentHP(int HP_Value)
     {
         currentHP += HP_Value;
@@ -87,6 +85,11 @@ public class PlayerStatus : MonoBehaviour
         {
             currentHP = getMaxHP();
         }
+    }
+
+    public void addMaxHP(int HP_Value)
+    {
+        lastingStatus.maxHP += HP_Value;
     }
 
     public bool addPlayerCurrentMP(int MP_Value)
@@ -101,25 +104,65 @@ public class PlayerStatus : MonoBehaviour
         return false;
     }
 
+    public void addMaxMP(int MP_Value)
+    {
+        lastingStatus.maxMP += MP_Value;
+    }
+
+    public void addArmorPoint(int Armor_Value)
+    {
+        lastingStatus.armorPoint += Armor_Value;
+    }
+
+    public void addAttackDamage(int AD_Value)
+    {
+        lastingStatus.attackDamage += AD_Value;
+    }
+
+    public void addAttackSpeed(float AS_Value)
+    {
+        lastingStatus.attackSpeed += AS_Value;
+    }
+
+    public void addMovementSpeed(float newSpeed)  //플레이어 스탯 변화에 추가작업이 필요한 경우 함수생성
+    {
+        Player.moveSpeed = lastingStatus.movementSpeed += newSpeed;
+        //Player.moveSpeed = movementSpeed;
+    }
+
+
+
     public void addPlayerEXP(int EXP_Value)
     {
         playerEXP += Mathf.FloorToInt(EXP_Value * expBonus);
     }
 
-    public float getPlayerSpeed()
+    #endregion
+
+
+
+#region Getter
+    public int getMaxHP()
     {
-        return lastingStatus.movementSpeed + buffStatus.movementSpeed;
+        return lastingStatus.maxHP + buffStatus.maxHP;
     }
+
+    public int getArmorPoint()
+    {
+        return lastingStatus.armorPoint + buffStatus.armorPoint;
+    }
+
 
     public int getAttackDamage()
     {
         return lastingStatus.attackDamage + buffStatus.attackDamage;
     }
-
-    public int getMaxHP()
+    public float getMovementSpeed()
     {
-        return lastingStatus.maxHP + buffStatus.maxHP;
+        return lastingStatus.movementSpeed + buffStatus.movementSpeed;
     }
+
+
     public int getMP_Regen()
     {
         return lastingStatus.MP_Regen + buffStatus.MP_Regen;
@@ -128,5 +171,8 @@ public class PlayerStatus : MonoBehaviour
     {
         return lastingStatus.attackSpeed + buffStatus.attackSpeed;
     }
+
+    #endregion
+
 
 }

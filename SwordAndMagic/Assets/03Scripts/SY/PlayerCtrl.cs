@@ -137,7 +137,7 @@ public class PlayerCtrl : MonoBehaviour
         //tr.TransformDirection(tr.position + (Vector3)moveVec);
         if (Moveable&&!isDie)
         {
-            tr.position += (Vector3)moveVec * /*moveSpeed*/playerStatus.getPlayerSpeed() * Time.deltaTime;
+            tr.position += (Vector3)moveVec * /*moveSpeed*/playerStatus.getMovementSpeed() * Time.deltaTime;
             anim.SetInteger("Horizontal", h);
             anim.SetInteger("Vertical", v);
 

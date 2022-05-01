@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     private int currentTimeMinute;  // Ка
     public Text TimeText;
     public Text PoolText;
+    
+    
 
     void Start()
     {

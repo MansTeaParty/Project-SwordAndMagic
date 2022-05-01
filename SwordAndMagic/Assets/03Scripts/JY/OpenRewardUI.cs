@@ -7,24 +7,27 @@ using UnityEngine;
 //충돌시에는 TimeScale값을 0으로 해 일시정지 시킵니다. 
 public class OpenRewardUI : MonoBehaviour
 {
-    private RewardManager _rewardManager;   
+    private RewardManager _rewardManager;
+    private ItemInfoSet _iteminfoset;
 
     private void Awake()
     {
-        _rewardManager = GameObject.Find("RewardManager").GetComponent<RewardManager>();        
+        _rewardManager = GameObject.Find("RewardManager").GetComponent<RewardManager>();
+        _iteminfoset = GameObject.Find("ItemList").GetComponent<ItemInfoSet>();            
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {       
         if(coll.gameObject.CompareTag("Player"))
-        {            
-            _rewardManager.SendMessage("ItemSet", SendMessageOptions.DontRequireReceiver);
-            Destroy(gameObject);
+        {
             Time.timeScale = 0;
             if (Time.timeScale == 0)
             {
                 Debug.Log("Time.timeScale = 0");
             }
+            _iteminfoset.SendMessage("ItemAbilitySet", SendMessageOptions.DontRequireReceiver);
+            _rewardManager.SendMessage("ItemSet", SendMessageOptions.DontRequireReceiver);           
+            Destroy(gameObject);            
         }
     }     
 }
