@@ -6,10 +6,13 @@ public class MonsterStat : MonoBehaviour
 {
     public int MonsterId;
 
+    [SerializeField]
+    private GameObject PC;
+
     public  GameObject      DamageFont;
     private GameObject      TraceTarget;
     private SpriteRenderer  ThisSpriteRenderer; 
-    private Animator        thisAnim;
+    public  Animator        thisAnim;
 
     public  float   MonsterMoveSpeed;           // 현재 몬스터 이동속도
     public  float   BaseMonsterMoveSpeed;       // 기본 이동속도 속성 값
@@ -38,18 +41,32 @@ public class MonsterStat : MonoBehaviour
     private GameObject HitEft;
 
     [SerializeField]
-    private GameObject attackProjectile;
+    private GameObject attackProjectile_0; // 투사체
+    [SerializeField]
+    private GameObject attackProjectile_1; // 보스 몬스터 장판 공격
 
     public GameObject RewardBox;
     public GameObject Mimic;
 
+    [SerializeField]
+    private GameObject TelelPortEffect; //  텔레포트 이펙트
+    private Vector3 TelePortPoint;      //  텔레포트를 위해 기준점을 잡을 필요가 있음
+
     void Start()
     {
+        PC = GameObject.FindGameObjectWithTag("Player");
+
         //  미믹에 한해서 변신한 상태가 아니면
         //  플레이어 공격에 맞지 않도록 박스콜라이더 꺼주기
         if (MonsterId == 5 && isTrans == false)
         {
             BoxColliderOnOff(false);
+        }
+
+        //  보스는 항상 넉백당하지 않음
+        if (MonsterId == 6)
+        {
+            isSuperArmor = true;
         }
 
         AttackCooltime = 5;
@@ -273,6 +290,7 @@ public class MonsterStat : MonoBehaviour
     /// Attack_C~~ -> Spiked슬라임
     /// Attack_D~~ -> Tentacle슬라임
     /// MimicTrans -> 미믹 변신
+    /// Attack_Boss -> 보스몬스터(네크로맨서)
     /// <returns></returns>
     IEnumerator Ability_Cool() 
     {
@@ -372,7 +390,7 @@ public class MonsterStat : MonoBehaviour
                 0);
 
             Quaternion angleAxis1 = Quaternion.Euler(0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x) * Mathf.Rad2Deg);
-            Instantiate(attackProjectile, transform.position, angleAxis1);
+            Instantiate(attackProjectile_0, transform.position, angleAxis1);
         }
         yield return new WaitForSeconds(0.1f);
 
@@ -419,7 +437,7 @@ public class MonsterStat : MonoBehaviour
             //  투사체 생성
             if (!isDead)
             {
-                Instantiate(attackProjectile, transform.position, angleAxis);
+                Instantiate(attackProjectile_0, transform.position, angleAxis);
             }
         }
         yield return new WaitForSeconds(0.1f);
@@ -436,6 +454,7 @@ public class MonsterStat : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
     }
 
+    //  미믹 변신
     IEnumerator MimicTrans()
     {
         thisAnim.SetBool("Trans", true);
@@ -450,17 +469,39 @@ public class MonsterStat : MonoBehaviour
         MonsterMoveSpeed = BaseMonsterMoveSpeed;
     }
 
-    IEnumerator Attack_F()
+
+    //  보스 행동 시작 
+    //  GM에서 타이머가 0되면 호출할 것
+    public void BossPattern(Vector3 BossPos)
     {
-        isSuperArmor = true;
-        float temp = MonsterMoveSpeed;
-        MonsterMoveSpeed = 0.0f;
+        Debug.Log("보스 위치 전달 받음:"+ BossPos);
+        TelePortPoint = BossPos;
+        //  내부 코루틴 시작
+        StartCoroutine(BossState());
+    }
 
-        yield return new WaitForSeconds(0.2f);
-        thisAnim.SetTrigger("Attack");
-        thisAnim.SetBool("isDuringAnim", true);
+    //
+    void TelelPort()
+    {
+        float randx = Random.Range(-1, 2);  //  -1  or  0 or 1
+        float randy = Random.Range(-1, 2);
+        float posx = randx * 100;           //  -100 or 0 or 100
+        float posy = randy * 60;            //  -60  or 0 or 60
 
-        yield return new WaitForSeconds(0.9f);
+        transform.position = TelePortPoint + new Vector3(posx, posx, 0);
+    }
+    IEnumerator BossState()
+    {
+        Debug.Log("텔레포트 중!!");
+        TelelPort();
+        Debug.Log("텔레포트 끝!!");
+        yield return new WaitForSeconds(5.0f);
+        Debug.Log("텔레포트 시작!");
+
+    }
+
+    IEnumerator Attack_Boss()
+    {
         toPcVec = new Vector3
             (TraceTarget.transform.position.x - transform.position.x,
              TraceTarget.transform.position.y - transform.position.y,
@@ -480,7 +521,7 @@ public class MonsterStat : MonoBehaviour
 
                 if (!isDead)
                 {
-                    Instantiate(attackProjectile, transform.position, angleAxis);
+                    Instantiate(attackProjectile_0, transform.position, angleAxis);
                 }
             }
             yield return new WaitForSeconds(0.01f);
@@ -502,7 +543,7 @@ public class MonsterStat : MonoBehaviour
 
                 if (!isDead)
                 {
-                    Instantiate(attackProjectile, transform.position, angleAxis);
+                    Instantiate(attackProjectile_0, transform.position, angleAxis);
                 }
             }
 
@@ -538,10 +579,10 @@ public class MonsterStat : MonoBehaviour
 
             if (!isDead)
             {
-                Instantiate(attackProjectile, transform.position, angleAxis1);
-                Instantiate(attackProjectile, transform.position, angleAxis2);
-                Instantiate(attackProjectile, transform.position, angleAxis3);
-                Instantiate(attackProjectile, transform.position, angleAxis4);
+                Instantiate(attackProjectile_0, transform.position, angleAxis1);
+                Instantiate(attackProjectile_0, transform.position, angleAxis2);
+                Instantiate(attackProjectile_0, transform.position, angleAxis3);
+                Instantiate(attackProjectile_0, transform.position, angleAxis4);
             }
 
             yield return new WaitForSeconds(0.15f);
@@ -552,13 +593,16 @@ public class MonsterStat : MonoBehaviour
         isSuperArmor = false;
         thisAnim.SetBool("isDuringAnim", false);
 
-        if (!isDead)
-        { MonsterMoveSpeed = temp; }
-        else
-        { MonsterMoveSpeed = 0.0f; }
 
         yield return new WaitForSeconds(0.5f);
     }
+
+
+
+
+
+
+
 
     void GiveExpToPlayer()
     {

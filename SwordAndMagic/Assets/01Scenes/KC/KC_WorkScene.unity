@@ -3278,14 +3278,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b78f89556c4da49ba54253a0fbf5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PC: {fileID: 0}
   GameOverUI: {fileID: 1190714564}
   TimeLineController: {fileID: 1912355669}
   SelectingTimeLine: {fileID: 0}
-  setTimeMinute: 15
-  setTimeSecond: 60
+  setTimeMinute: 1
+  setTimeSecond: 5
   SetSpawnPoolTime: 30
   TimeText: {fileID: 603190167}
   PoolText: {fileID: 224954306}
+  Boss: {fileID: 1090069749605121672, guid: 39c9ade2b4ee2a54d8badd8d56d35080, type: 3}
+  Founds: []
+  NowMonsterPool: {fileID: 0}
 --- !u!4 &1470449778
 Transform:
   m_ObjectHideFlags: 0
@@ -5574,7 +5578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8398390274278244733, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
@@ -5669,7 +5673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8391641586692204741, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}

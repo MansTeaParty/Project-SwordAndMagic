@@ -14,7 +14,7 @@ public class MonsterPoolCtrl : MonoBehaviour
     public GameObject Monster_C;
     public GameObject Monster_D;
 
-    private bool SpawnApprove; //생성해도 된다는 승인 변수
+    public bool SpawnApprove; //생성해도 된다는 승인 변수
 
     //스폰할 몬스터 수
     public int SpawnValue_A;
@@ -30,10 +30,6 @@ public class MonsterPoolCtrl : MonoBehaviour
         SpawnApprove = true;
 
         MonsterPoolCheck();
-    }
-
-    void Update()
-    {
     }
 
     void MonsterPoolCheck()
@@ -63,7 +59,7 @@ public class MonsterPoolCtrl : MonoBehaviour
 
     IEnumerator MonsterSpawnStart()
     {
-        while (SpawnApprove == true)
+        if(SpawnApprove == true)
         {
             for (int i = 0; i < SpawnValue_A; i++)
             {
@@ -93,7 +89,7 @@ public class MonsterPoolCtrl : MonoBehaviour
             }
 
 
-            //Destroy(gameObject);
+            Destroy(gameObject);
             //지우면 플레이 했을 때 리스트대로 나오는지 확인가능
             //활성화 하면 몬스터 풀에 할당된 모든 몬스터가 다 소환 완료 되면 
             //객체 스스로 지워짐
