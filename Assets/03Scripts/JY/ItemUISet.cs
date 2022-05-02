@@ -7,11 +7,7 @@ using UnityEngine.EventSystems;
 //, IPointerEnterHandler, IPointerExitHandler
 
 public class ItemUISet : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
-
 {
-    public GameObject Button1;
-    public GameObject Button2;
-    public GameObject Button3;
 
     public GameObject ItemUI;
 
@@ -24,31 +20,12 @@ public class ItemUISet : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
   
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GameObject pointerEnter = eventData.pointerEnter;       
+        GameObject pointerEnter = eventData.pointerEnter;
 
-        if ((pointerEnter == Button1) || (pointerEnter == Button1.transform.GetChild(0).gameObject) 
-            || (pointerEnter == Button1.transform.GetChild(1).gameObject))
-        {
-            ItemUI.transform.GetChild(0).GetComponent<Image>().sprite = Button1.transform.GetChild(1).GetComponent<Image>().sprite;
-            ItemUITextSet();
-            Debug.Log("Button1");
-        }      
 
-        else if((pointerEnter == Button2) || (pointerEnter == Button2.transform.GetChild(0).gameObject)
-            || (pointerEnter == Button2.transform.GetChild(1).gameObject))
-        {
-            ItemUI.transform.GetChild(0).GetComponent<Image>().sprite = Button2.transform.GetChild(1).GetComponent<Image>().sprite;
-            ItemUITextSet();
-            Debug.Log("Button2");
-        }
+        ItemUI.transform.GetChild(0).GetComponent<Image>().sprite = gameObject.transform.GetChild(1).GetComponent<Image>().sprite;
+        ItemUITextSet();
 
-        else if ((pointerEnter == Button3) || (pointerEnter == Button3.transform.GetChild(0).gameObject)
-            || (pointerEnter == Button3.transform.GetChild(1).gameObject))
-        {
-            ItemUI.transform.GetChild(0).GetComponent<Image>().sprite = Button3.transform.GetChild(1).GetComponent<Image>().sprite;
-            ItemUITextSet();
-            Debug.Log("Button3");
-        }      
         ItemUI.SetActive(true);      
     }
     

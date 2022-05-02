@@ -13,12 +13,12 @@ public class OpenRewardUI : MonoBehaviour
     private void Awake()
     {
         _rewardManager = GameObject.Find("RewardManager").GetComponent<RewardManager>();
-        _iteminfoset = GameObject.Find("ItemList").GetComponent<ItemInfoSet>();            
+        _iteminfoset = GameObject.Find("ItemList").GetComponent<ItemInfoSet>();
     }
 
     void OnTriggerEnter2D(Collider2D coll)
-    {       
-        if(coll.gameObject.CompareTag("Player"))
+    {
+        if (coll.gameObject.CompareTag("Player"))
         {
             Time.timeScale = 0;
             if (Time.timeScale == 0)
@@ -26,8 +26,8 @@ public class OpenRewardUI : MonoBehaviour
                 Debug.Log("Time.timeScale = 0");
             }
             _iteminfoset.SendMessage("ItemAbilitySet", SendMessageOptions.DontRequireReceiver);
-            _rewardManager.SendMessage("ItemSet", SendMessageOptions.DontRequireReceiver);           
-            Destroy(gameObject);            
+            _rewardManager.SendMessage("ItemSet", SendMessageOptions.DontRequireReceiver);
+            Destroy(gameObject);
         }
-    }     
+    }
 }

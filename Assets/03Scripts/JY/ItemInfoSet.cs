@@ -33,7 +33,7 @@ public class ItemInfoSet : MonoBehaviour
         //유의점: 밑의 행이 정상적으로 실행되려면 이미지들(sprite)이 Resources파일에 반드시 저장 되어 있어야 합니다.
         //Resources파일 안에 있는 파일에 있으면 상관없습니다. Ex: ItemImages -> Resources안에 있는 파일이름입니다. 
         ItemImages = Resources.LoadAll<Sprite>("ItemImages");
-        Debug.Log(Resources.FindObjectsOfTypeAll<Sprite>().Length  + "zz"+ItemImages.Length);
+
 
         //아이템 리스트에 아이템 정보 저장
         ItemInfo ItemA = new ItemInfo();
