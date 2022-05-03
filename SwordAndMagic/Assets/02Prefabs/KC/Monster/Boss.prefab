@@ -317,7 +317,7 @@ MonoBehaviour:
   attackProjectile_1: {fileID: 7425622367053262539, guid: 09d58096cdb35d64ba6e5fd7af43067d, type: 3}
   RewardBox: {fileID: 42248514509484756, guid: fa251edb20e18ee4ab908e7604d1c634, type: 3}
   Mimic: {fileID: 0}
-  TelelPortEffect: {fileID: 1828284929}
+  TelePortEffect: {fileID: 1828284929}
 --- !u!1 &4604246952702545475
 GameObject:
   m_ObjectHideFlags: 0

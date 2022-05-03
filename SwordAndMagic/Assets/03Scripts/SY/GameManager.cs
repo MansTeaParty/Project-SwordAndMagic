@@ -156,6 +156,7 @@ public class GameManager : MonoBehaviour
     #region BossCutScene
     IEnumerator BossStart()
     {
+
         //  플레이어 속도 저장하고 연출 시작하면 속도 0으로, 연출 끝나면 돌려주기
         float pcOriginSpeed = PC.moveSpeed;
         PC.moveSpeed = 0f;
@@ -169,9 +170,9 @@ public class GameManager : MonoBehaviour
 
         //  삭제할 객체를 찾기
         StartCoroutine(FoundObjects());
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1.0f);
 
-        Vector3 bossSpawnPos = PC.transform.position + new Vector3(0, 50, 0);
+        Vector3 bossSpawnPos = PC.transform.position + new Vector3(0, 60, 0);
         GameObject b_Boss = Instantiate(Boss, bossSpawnPos, Quaternion.identity);
 
         //  카메라 연출
@@ -186,11 +187,13 @@ public class GameManager : MonoBehaviour
 
         //  보스 걸어가는 연출
         b_Boss.GetComponent<MonsterStat>().MonsterMoveSpeed = 10f;
-        b_Boss.GetComponent<MonsterStat>().thisAnim.SetTrigger("Move");
+        b_Boss.GetComponent<Animator>().SetTrigger("Move");
 
         yield return new WaitForSeconds(3f);
         b_Boss.GetComponent<MonsterStat>().MonsterMoveSpeed = 0f;
         b_Boss.GetComponent<Animator>().SetTrigger("Idle");
+        yield return new WaitForSeconds(0.5f);
+
 
 
         //  보스 말풍선
@@ -250,8 +253,15 @@ public class GameManager : MonoBehaviour
 
         //  MonsterStat.cs에 보스의 위치를 전달
         //  그러면 MonsterStat.cs에서 위치를 저장하고 그것을 기준으로 보스의 텔레포트 범위를 계산하는데 사용
-        b_Boss.GetComponent<MonsterStat>().BossPattern(bossSpawnPos);
+
+
+        //  플레이어 이동속도 돌려주고
         PC.moveSpeed = pcOriginSpeed;
+        yield return new WaitForSeconds(1.0f);
+
+        //보스 패턴 시작
+        b_Boss.GetComponent<MonsterStat>().BossPattern(b_Boss.transform.position);
+
         //PC.stop = false;
     }
 

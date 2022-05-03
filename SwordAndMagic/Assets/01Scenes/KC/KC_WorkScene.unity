@@ -1289,14 +1289,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8657890758755520566, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
-      propertyPath: MonsterHP
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: -8657890758755520566, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
-      propertyPath: MonsterDropRate
-      value: 999
-      objectReference: {fileID: 0}
     - target: {fileID: 8543551665867676290, guid: 55a583fb070c4304aa5cc5a4adbe919e, type: 3}
       propertyPath: m_Name
       value: Mon_SpikedSlime
@@ -1534,7 +1526,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 50
+  orthographic size: 70
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2322,14 +2314,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4833709489344546095, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
-      propertyPath: MonsterHP
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: -4833709489344546095, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
-      propertyPath: MonsterDropRate
-      value: 999
-      objectReference: {fileID: 0}
     - target: {fileID: 370152872527989791, guid: 2118b6701c09d274b91a73eaa039bba2, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -5520,14 +5504,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6530143149172557174, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
-      propertyPath: MonsterHP
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6530143149172557174, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
-      propertyPath: MonsterDropRate
-      value: 999
-      objectReference: {fileID: 0}
     - target: {fileID: 8398390274278244722, guid: c210619fb750aed4fa455b9cc879bfa8, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -5599,29 +5575,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 208805464441650211, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2814020358370030905, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
-      propertyPath: AttackRange
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2814020358370030905, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
-      propertyPath: MonsterPrivateCoolTime
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8391641586692204738, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
       propertyPath: m_RootOrder
       value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 8391641586692204738, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8391641586692204738, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8391641586692204738, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5663,10 +5619,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8391641586692204739, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8391641586692204741, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
       propertyPath: m_Name
       value: Mons_Mimic
@@ -5684,14 +5636,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4317609028912797798, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
-      propertyPath: MonsterHP
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4317609028912797798, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
-      propertyPath: MonsterDropRate
-      value: 999
-      objectReference: {fileID: 0}
     - target: {fileID: 7535449741437306266, guid: a5a7384c86eea694f97eaa2d54d69bce, type: 3}
       propertyPath: m_Name
       value: Mon_Tentacle Slime

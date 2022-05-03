@@ -49,7 +49,7 @@ public class MonsterStat : MonoBehaviour
     public GameObject Mimic;
 
     [SerializeField]
-    private GameObject TelelPortEffect; //  텔레포트 이펙트
+    private GameObject TelePortEffect;  //  텔레포트 이펙트
     private Vector3 TelePortPoint;      //  텔레포트를 위해 기준점을 잡을 필요가 있음
 
     void Start()
@@ -100,33 +100,25 @@ public class MonsterStat : MonoBehaviour
         
         objPosXCal = transform.position.x - TraceTarget.transform.position.x;
 
-        //  다른 몬스터의 경우 스프라이트가 오른쪽을 바라보고 있음
-        //  그러나 미믹의 경우 스프라이트가 왼쪽을 바라보고 있음
-        //  그래서 미믹만 따로 바라보는 방향을 반대로 해줘야 함.
-        //  트랜스폼에서 y rotation 값을 180으로 하면 따로 코드로 방향 전환해줄 필요 없지만
-        //  데미지 폰트 또한 반대로 출력되서 그렇게 되면 데미지 폰트 코드를 또 건들여야 됨.
-        if (MonsterId == 5)
+        if (objPosXCal < 0f)//이 객체가 플레이어보다 왼쪽에 있음, 0.00001이라도 0보다만 작으면
         {
-            if (isTrans)
-            { objPosXCal *= -1; }
-            //  미믹이 변신하 않았을 때 플레이어를 바라볼 필요가 없으므로
-            //  아예 0으로 고정시켜서 스프라이트 좌우반전 하지 않도록
-            else
-            { objPosXCal *= 0; }
-        }
-        if (!isDead)
-        {
-            if (objPosXCal < 0f)//이 객체가 플레이어보다 왼쪽에 있음, 0.00001이라도 0보다만 작으면
+            if (!isAttack && !isDead/*&& !isGetCC */&& isTrans)
             {
                 ThisSpriteRenderer.flipX = false;
+                if (MonsterId == 5 || MonsterId ==6)
+                { ThisSpriteRenderer.flipX = true; }
             }
-            else if (objPosXCal > 0f)//이 객체가 플레이어보다 오른쪽에 있음, 0.00001이라도 0보다만 크면
+        }
+        else//이 객체가 플레이어보다 오른쪽에 있음, 0.00001이라도 0보다만 크면
+        {
+            if (!isAttack && !isDead/* && !isGetCC*/ && isTrans)
             {
                 ThisSpriteRenderer.flipX = true;
+                if (MonsterId == 5 || MonsterId == 6)
+                { ThisSpriteRenderer.flipX = false; }
             }
-            else // 무조건 0이면
-            { }
         }
+    
     }
 
     private void MonsterAbility()
@@ -474,13 +466,12 @@ public class MonsterStat : MonoBehaviour
     //  GM에서 타이머가 0되면 호출할 것
     public void BossPattern(Vector3 BossPos)
     {
-        Debug.Log("보스 위치 전달 받음:"+ BossPos);
         TelePortPoint = BossPos;
         //  내부 코루틴 시작
         StartCoroutine(BossState());
     }
 
-    //
+    // 텔레포트 좌표 따기
     void TelelPort()
     {
         float randx = Random.Range(-1, 2);  //  -1  or  0 or 1
@@ -488,16 +479,60 @@ public class MonsterStat : MonoBehaviour
         float posx = randx * 100;           //  -100 or 0 or 100
         float posy = randy * 60;            //  -60  or 0 or 60
 
-        transform.position = TelePortPoint + new Vector3(posx, posx, 0);
+        //  텔레포트 위치 구하기
+        Vector3 teleportpos = TelePortPoint + new Vector3(posx, posy, 0);
+        Vector3 isnewpos = teleportpos;
+
+        //  만약 현재 있는 위치랑 새로운 텔레포트 위치가 같으면 
+        if (transform.position == isnewpos)
+        {   TelelPort();    } // 새로운 위치 구하기
+        // 같지 않으면 계산한 위치로 이동
+        else 
+        {   transform.position = teleportpos;   }
     }
+
+    void SelectAttack()
+    {
+        int selectNum = Random.Range(0, 3);
+
+        switch (selectNum)
+        {
+
+            case 0:
+                StartCoroutine(Attack_Boss1());
+                break;
+
+            case 1:
+                StartCoroutine(Attack_Boss2());
+                break;
+            
+            case 2:
+                StartCoroutine(Attack_Boss3());
+                break;
+
+            /*case 3:
+                StartCoroutine(Attack_Boss4());
+                break;*/
+            
+            default:
+                break;
+        }
+    }
+
     IEnumerator BossState()
     {
-        Debug.Log("텔레포트 중!!");
+        TelePortEffect.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        TelePortEffect.SetActive(false);
         TelelPort();
-        Debug.Log("텔레포트 끝!!");
-        yield return new WaitForSeconds(5.0f);
-        Debug.Log("텔레포트 시작!");
 
+        yield return new WaitForSeconds(0.5f);
+        //  어떤 공격을 할 것인지 결정
+        SelectAttack();
+
+
+        yield return new WaitForSeconds(10.0f);
+        StartCoroutine(BossState());
     }
 
     IEnumerator Attack_Boss()
@@ -597,11 +632,103 @@ public class MonsterStat : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
     }
 
+    IEnumerator Attack_Boss1()
+    {
+        thisAnim.SetTrigger("Attack");
+        yield return new WaitForSeconds(0.3f);
+        for (int k = 0; k < 20; k++)
+        {
+            float plusAngle2 = k * 3;
 
+            for (int j = 0; j < 4; j++)
+            {
+                float other = j * 90f;
+                for (int i = -1; i < 2; i++)
+                {
+                    float plusAngle = i * 15f + other;
 
+                    Quaternion angleAxis = Quaternion.Euler(
+                        0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                        * Mathf.Rad2Deg + plusAngle + plusAngle2);
 
+                    if (!isDead)
+                    {
+                        Instantiate(attackProjectile_0, transform.position, angleAxis);
+                    }
+                }
+                yield return new WaitForSeconds(0.01f);
+            }
+            yield return new WaitForSeconds(0.2f);
+        }
+        thisAnim.SetTrigger("Idle");
+        yield return new WaitForSeconds(1f);
+    }
 
+    IEnumerator Attack_Boss2()
+    {
+        thisAnim.SetTrigger("Attack");
+        yield return new WaitForSeconds(0.3f);
 
+        for (int i = 0; i < 80; i++)
+        {
+            float plusAngle1 = i * 10f;
+            float plusAngle2 = i * 10f + 90;
+            float plusAngle3 = i * 10f + 180f;
+            float plusAngle4 = i * 10f + 270f;
+
+            Quaternion angleAxis1 = Quaternion.Euler(
+                0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                * Mathf.Rad2Deg + plusAngle1);
+
+            Quaternion angleAxis2 = Quaternion.Euler(
+               0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+               * Mathf.Rad2Deg + plusAngle2);
+
+            Quaternion angleAxis3 = Quaternion.Euler(
+                0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                * Mathf.Rad2Deg + plusAngle3);
+
+            Quaternion angleAxis4 = Quaternion.Euler(
+               0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+               * Mathf.Rad2Deg + plusAngle4);
+
+            if (!isDead)
+            {
+                Instantiate(attackProjectile_0, transform.position, angleAxis1);
+                Instantiate(attackProjectile_0, transform.position, angleAxis2);
+                Instantiate(attackProjectile_0, transform.position, angleAxis3);
+                Instantiate(attackProjectile_0, transform.position, angleAxis4);
+            }
+
+            yield return new WaitForSeconds(0.15f);
+        }
+        thisAnim.SetTrigger("Idle");
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator Attack_Boss3()
+    {
+        thisAnim.SetTrigger("Attack");
+        yield return new WaitForSeconds(0.3f);
+        for (int j = 0; j < 5; j++)
+        {
+
+            for (int i = 0; i < 25; i++)
+            {
+                Vector3 Pos = TraceTarget.transform.position + new Vector3(Random.Range(-60, 60), Random.Range(-60, 60), 0);
+                if (!isDead)
+                {
+                    Instantiate(attackProjectile_1, Pos, Quaternion.identity);
+                }
+
+                yield return new WaitForSeconds(Random.Range(0.05f, 0.1f));
+            }
+
+            yield return new WaitForSeconds(0.0f);
+        }
+        thisAnim.SetTrigger("Idle");
+        yield return new WaitForSeconds(1f);
+    }
 
 
     void GiveExpToPlayer()

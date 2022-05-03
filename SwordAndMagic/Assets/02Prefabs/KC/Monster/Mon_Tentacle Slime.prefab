@@ -232,18 +232,19 @@ MonoBehaviour:
   attackDamageForText: 0
   isDead: 0
   isTrans: 0
-  MonsterHP: 120
+  MonsterHP: 15
   AttackRange: 80
   MonsterPrivateCoolTime: 7
   MonsterDamage: 9
   MonsterExp: 60
-  MonsterDropRate: 150
+  MonsterDropRate: 999
   KnockBackPower: 1
   HitEft: {fileID: 940301946638717030, guid: fcafeb082a814314a83134f1e3efaa61, type: 3}
   attackProjectile_0: {fileID: 248482333223153471, guid: 248e268f71d2e5a43935d4757efccfc9, type: 3}
   attackProjectile_1: {fileID: 0}
   RewardBox: {fileID: 42248514509484756, guid: fa251edb20e18ee4ab908e7604d1c634, type: 3}
   Mimic: {fileID: 8391641586692204741, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
+  TelelPortEffect: {fileID: 0}
 --- !u!114 &4317609028912797803
 MonoBehaviour:
   m_ObjectHideFlags: 0
