@@ -110,6 +110,8 @@ public class PlayerCtrl : MonoBehaviour
 
     void GetInput()
     {
+
+
         h = ((int)Input.GetAxisRaw("Horizontal"));
         v = ((int)Input.GetAxisRaw("Vertical"));
         wDown = Input.GetKeyDown(KeyCode.W);
@@ -230,7 +232,7 @@ public class PlayerCtrl : MonoBehaviour
         instance.GetComponent<BaseAttack>().setPenetration(playerStatus.penetration);
         yield return new WaitForSeconds(playerStatus.getAttackSpeed());
         Attackable = true;
-
+   
         
         //while (true)
         //{
