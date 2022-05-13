@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 5195149447350365387}
-  type: Monster
+  type: Enemy
 --- !u!1 &4554998894437512214
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,7 +30,6 @@ public class BaseAttack : MonoBehaviour
         Destroy(gameObject, 5.0f);
 
         System.Array.Resize(ref monster, penetration);
-        //GetComponent<BoxCollider2D>().enabled = true; //이거 왜있음
     }
 
     // Update is called once per frame
@@ -41,7 +40,8 @@ public class BaseAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log(collision.ToString());if (hit == false)
+        //Debug.Log(collision.ToString());
+        if (hit == false)
         {
             hit = true;
             if (collision.gameObject.tag == "Enemy")
@@ -53,9 +53,7 @@ public class BaseAttack : MonoBehaviour
                     {
                         monster[a] = collision.gameObject;
                         a += 1;
-                        penetration -= 1;      //몬스터 스크립트에 데미지와 넉백거리를 전달하며 몬스터 피격처리 실행//
-                        //collision.gameObject.GetComponent<MonsterAI>().Hit(this.gameObject, attackDamage, knockBack);
-
+                        penetration -= 1;
                         collision.GetComponent<MonsterCtrl>().Hit(attackDamage);
                         if (penetration <= 0)
                         {

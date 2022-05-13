@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterId: 1
+  PC: {fileID: 0}
   DamageFont: {fileID: 3895946128422453707, guid: 038f9b9718e550d44b59df653197064f, type: 3}
   MonsterMoveSpeed: 15
   BaseMonsterMoveSpeed: 15
@@ -204,8 +205,10 @@ MonoBehaviour:
   MonsterDamage: 5
   MonsterExp: 10
   MonsterDropRate: 100
-  KnockBackPower: 1
+  KnockBackPower: 1.5
   HitEft: {fileID: 940301946638717030, guid: fcafeb082a814314a83134f1e3efaa61, type: 3}
-  attackProjectile: {fileID: 0}
-  RewardBox: {fileID: 42248514509484756, guid: fa251edb20e18ee4ab908e7604d1c634, type: 3}
+  RewardBox: {fileID: 3520576200206273295, guid: 50321b10cdff20b489af6d7805d3b8ed, type: 3}
   Mimic: {fileID: 8391641586692204741, guid: 0a480c7c074729942a440cb517c0e7e6, type: 3}
+  attackProjectile_0: {fileID: 0}
+  attackProjectile_1: {fileID: 0}
+  TelePortEffect: {fileID: 0}

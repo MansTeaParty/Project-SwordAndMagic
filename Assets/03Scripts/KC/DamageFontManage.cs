@@ -74,6 +74,10 @@ public class DamageFontManage : MonoBehaviour
                 {
                     scale = 0.001f;
                 }
+                if (monsterid == 6) // 네크로맨서(보스)
+                {
+                    scale = 0.001f;
+                }
 
                 transform.localScale += new Vector3(scale, scale, 0.001f);
 

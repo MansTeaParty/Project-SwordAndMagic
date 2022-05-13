@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bddaa163afdf0e042aabe1a80744f901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BaseTileSpeed: 40
+  TileSpeed: 40
 --- !u!212 &4474991953573944723
 SpriteRenderer:
   m_ObjectHideFlags: 0

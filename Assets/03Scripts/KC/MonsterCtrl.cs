@@ -5,6 +5,8 @@ using UnityEngine;
 public class MonsterCtrl : MonoBehaviour
 {
     public int MonsterId;
+    [SerializeField]
+    private GameObject PC;
 
     public  GameObject      DamageFont;
     private GameObject      TraceTarget;
@@ -29,7 +31,7 @@ public class MonsterCtrl : MonoBehaviour
 
     public  int     MonsterExp;
     public  float   MonsterDropRate;
-    public  float   KnockBackPower;    //넉백 정도를 저장할 변수, 일단 1
+    public  float   KnockBackPower;    //넉백 정도를 저장할 변수
 
     //현재 객체와 플레이어 캐릭터 사이의 거리
     private Vector3 toPcVec;
@@ -37,19 +39,35 @@ public class MonsterCtrl : MonoBehaviour
     [SerializeField]
     private GameObject HitEft;
 
-    [SerializeField]
-    private GameObject attackProjectile;
-
     public GameObject RewardBox;
     public GameObject Mimic;
 
+    [SerializeField]
+    private GameObject attackProjectile_0; // 투사제
+    [SerializeField]
+    private GameObject attackProjectile_1; // 보스 장판 공격
+
+    [SerializeField]
+    private GameObject TelePortEffect;  //  텔레포트 이펙트
+    private Vector3 TelePortPoint;      //  텔레포트를 위해 기준점을 잡을 필요가 있음
+    public int SelectAttackNum;
+    public List<GameObject> TileList;
+
     void Start()
     {
+        PC = GameObject.FindGameObjectWithTag("Player");
+
         //  미믹에 한해서 변신한 상태가 아니면
         //  플레이어 공격에 맞지 않도록 박스콜라이더 꺼주기
         if (MonsterId == 5 && isTrans == false)
         {
             BoxColliderOnOff(false);
+        }
+
+        //  보스는 항상 넉백당하지 않음
+        if (MonsterId == 6)
+        {
+            isSuperArmor = true;
         }
 
         AttackCooltime = 5;
@@ -83,31 +101,25 @@ public class MonsterCtrl : MonoBehaviour
         
         objPosXCal = transform.position.x - TraceTarget.transform.position.x;
 
-        //  다른 몬스터의 경우 스프라이트가 오른쪽을 바라보고 있음
-        //  그러나 미믹의 경우 스프라이트가 왼쪽을 바라보고 있음
-        //  그래서 미믹만 따로 바라보는 방향을 반대로 해줘야 함.
-        //  트랜스폼에서 y rotation 값을 180으로 하면 따로 코드로 방향 전환해줄 필요 없지만
-        //  데미지 폰트 또한 반대로 출력되서 그렇게 되면 데미지 폰트 코드를 또 건들여야 됨.
-        if (MonsterId == 5)
+        if (MonsterId == 5 || MonsterId == 6)
         {
             if (isTrans)
             { objPosXCal *= -1; }
-            //  미믹이 변신하 않았을 때 플레이어를 바라볼 필요가 없으므로
-            //  아예 0으로 고정시켜서 스프라이트 좌우반전 하지 않도록
             else
             { objPosXCal *= 0; }
         }
+
         if (!isDead)
         {
-            if (objPosXCal < 0f)//이 객체가 플레이어보다 왼쪽에 있음, 0.00001이라도 0보다만 작으면
+            if (objPosXCal < 0f)
             {
                 ThisSpriteRenderer.flipX = false;
             }
-            else if (objPosXCal > 0f)//이 객체가 플레이어보다 오른쪽에 있음, 0.00001이라도 0보다만 크면
+            else if (objPosXCal > 0f)
             {
                 ThisSpriteRenderer.flipX = true;
             }
-            else // 무조건 0이면
+            else
             { }
         }
     }
@@ -142,11 +154,10 @@ public class MonsterCtrl : MonoBehaviour
         }
     }
 
-    //플레이어가 호출
+    //플레이어 공격이 호출
     public void Hit(int attackDamage)
     {
         Vector2 knockBackVec = new Vector2(transform.position.x - TraceTarget.transform.position.x, transform.position.y - TraceTarget.transform.position.y);
-
         StartCoroutine(KnockBack(knockBackVec, attackDamage));
     }
     
@@ -372,7 +383,7 @@ public class MonsterCtrl : MonoBehaviour
                 0);
 
             Quaternion angleAxis1 = Quaternion.Euler(0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x) * Mathf.Rad2Deg);
-            Instantiate(attackProjectile, transform.position, angleAxis1);
+            Instantiate(attackProjectile_0, transform.position, angleAxis1);
         }
         yield return new WaitForSeconds(0.1f);
 
@@ -419,7 +430,7 @@ public class MonsterCtrl : MonoBehaviour
             //  투사체 생성
             if (!isDead)
             {
-                Instantiate(attackProjectile, transform.position, angleAxis);
+                Instantiate(attackProjectile_0, transform.position, angleAxis);
             }
         }
         yield return new WaitForSeconds(0.1f);
@@ -450,114 +461,274 @@ public class MonsterCtrl : MonoBehaviour
         MonsterMoveSpeed = BaseMonsterMoveSpeed;
     }
 
-    IEnumerator Attack_F()
+    /// <summary>
+    /// 보스 공격 패턴
+    /// </summary>
+
+    //  보스 행동 시작 
+    //  GM에서 타이머가 0되면 호출할 것
+    public void BossPattern(Vector3 BossPos)
     {
-        isSuperArmor = true;
-        float temp = MonsterMoveSpeed;
-        MonsterMoveSpeed = 0.0f;
+        // 보스의 현재 위치를 받아옴.
+        // 보스 생성이후 플레이어 방향으로 3초정도 걸어옴.
+        // 그 시점 이후의 보스 위치를 말하는 것.
+        // 이유 : 컷신 이후 보스 위치 기준으로 벽이 생성되는데 벽 내부에서만 
+        // 텔레포트하면서 공격하기 위해
+        TelePortPoint = BossPos;
 
-        yield return new WaitForSeconds(0.2f);
-        thisAnim.SetTrigger("Attack");
-        thisAnim.SetBool("isDuringAnim", true);
+        //  보스 공격 코루틴 시작
+        StartCoroutine(BaseAttack_Boss());          // 보스 기본 공격 - 플레이어 위치에 장판 공격 한개 생성
+        StartCoroutine(SpecialAttack_Boss());       // 보스 특수 공격 - 텔레포트 이후 공격 선택
+    }
 
-        yield return new WaitForSeconds(0.9f);
-        toPcVec = new Vector3
-            (TraceTarget.transform.position.x - transform.position.x,
-             TraceTarget.transform.position.y - transform.position.y,
-             0);
+    IEnumerator SpecialAttack_Boss()
+    {
+        StartCoroutine(TelePort());
+        yield return new WaitForSeconds(1.5f);
 
-        //3갈래로 나가는 투사체를 4방향으로 발사 
-        for (int j = 0; j < 4; j++)
-        {
-            float other = j * 90f;
-            for (int i = -1; i < 2; i++)
-            {
-                float plusAngle = i * 15f + other;
+        SelectAttack();
+        yield return new WaitForSeconds(1.5f);
+    }
 
-                Quaternion angleAxis = Quaternion.Euler(
-                    0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
-                    * Mathf.Rad2Deg + plusAngle);
+    // 텔레포트
+    IEnumerator TelePort()
+    {
+        TelePortEffect.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        TelePortEffect.SetActive(false);
 
-                if (!isDead)
-                {
-                    Instantiate(attackProjectile, transform.position, angleAxis);
-                }
-            }
-            yield return new WaitForSeconds(0.01f);
-        }
+        float randx = Random.Range(-1, 2);  //  -1  or  0 or 1
+        float randy = Random.Range(-1, 2);
+        float posx = randx * 100;           //  -100 or 0 or 100
+        float posy = randy * 60;            //  -60  or 0 or 60
 
-        //한번에 전 방향으로 발사
-        for (int j = 0; j < 5; j++)
-        {
-            float plusRotate = j * 3f;
+        //  텔레포트 위치 구하기
+        Vector3 teleportpos = TelePortPoint + new Vector3(posx, posy, 0);
+        Vector3 isnewpos = teleportpos;
 
-            for (int i = 0; i < 18; i++)
-            {
-                float plusAngle = i * 20f;
-                float sum = plusAngle + plusRotate;
-
-                Quaternion angleAxis = Quaternion.Euler(
-                    0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
-                    * Mathf.Rad2Deg + sum);
-
-                if (!isDead)
-                {
-                    Instantiate(attackProjectile, transform.position, angleAxis);
-                }
-            }
-
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        ////////////////////////////////
-      
-        
-        // 4방향으로 조금씩 각도를 틀면서 원형으로 투사체를 발사
-        for (int i = 0; i < 40; i++)
-        {
-            float plusAngle1 = i * 10f;
-            float plusAngle2 = i * 10f + 90;
-            float plusAngle3 = i * 10f + 180f;
-            float plusAngle4 = i * 10f + 270f;
-
-            Quaternion angleAxis1 = Quaternion.Euler(
-                0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
-                * Mathf.Rad2Deg + plusAngle1);
-
-            Quaternion angleAxis2 = Quaternion.Euler(
-               0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
-               * Mathf.Rad2Deg + plusAngle2);
-
-            Quaternion angleAxis3 = Quaternion.Euler(
-                0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
-                * Mathf.Rad2Deg + plusAngle3);
-
-            Quaternion angleAxis4 = Quaternion.Euler(
-               0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
-               * Mathf.Rad2Deg + plusAngle4);
-
-            if (!isDead)
-            {
-                Instantiate(attackProjectile, transform.position, angleAxis1);
-                Instantiate(attackProjectile, transform.position, angleAxis2);
-                Instantiate(attackProjectile, transform.position, angleAxis3);
-                Instantiate(attackProjectile, transform.position, angleAxis4);
-            }
-
-            yield return new WaitForSeconds(0.15f);
-        }
-        
-        yield return new WaitForSeconds(0.1f);
-
-        isSuperArmor = false;
-        thisAnim.SetBool("isDuringAnim", false);
-
-        if (!isDead)
-        { MonsterMoveSpeed = temp; }
+        //  만약 현재 있는 위치랑 새로운 텔레포트 위치가 같으면 
+        if (transform.position == isnewpos)
+        { StartCoroutine(TelePort()); } // 새로운 위치 구하기
+        // 같지 않으면 계산한 위치로 이동
         else
-        { MonsterMoveSpeed = 0.0f; }
+        { transform.position = teleportpos; }
+        yield return new WaitForSeconds(1.0f);
+    }
 
-        yield return new WaitForSeconds(0.5f);
+    void SelectAttack()
+    {
+        //SelectAttackNu = Random.Range(0, 6);
+        StartCoroutine(Boss_AttackKinds(SelectAttackNum));
+    }
+
+    IEnumerator BaseAttack_Boss()
+    { 
+        // 플레이어 현재 위치에 장판 공격 한개 생성하는 보스 기본 공격
+        Instantiate(attackProjectile_1, TraceTarget.transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(Random.Range(2.5f, 3.5f));
+        StartCoroutine(BaseAttack_Boss());
+    }
+
+    IEnumerator Boss_AttackKinds(int attacknum)
+    {
+        thisAnim.SetTrigger("Attack");
+        yield return new WaitForSeconds(0.8f);
+
+        switch (attacknum)
+        {
+            case 0: // 투사체를 전방향으로 발사
+                for (int j = 0; j < 15; j++)
+                {
+                    float plusRotate = j * 3f;
+
+                    for (int i = 0; i < 20; i++)
+                    {
+                        float plusAngle = i * 18f;
+                        float sum = plusAngle + plusRotate + Random.Range(-15, 16);
+
+                        Quaternion angleAxis = Quaternion.Euler(
+                            0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                            * Mathf.Rad2Deg + sum);
+
+                        if (!isDead)
+                        {
+                            Instantiate(attackProjectile_0, transform.position, angleAxis);
+                        }
+                    }
+                    yield return new WaitForSeconds(0.5f);
+                }
+                break;
+
+            case 1: //  상하좌우 4방향으로 3갈래로 나가는 투사체를 각도를 더해주면서 발사
+                for (int k = 0; k < 20; k++) //총 20줄을 발사할건데
+                {
+                    float plusAngle2 = k * 3; // 1줄 쏘면 다음 줄은 3도 만큼 더해진 방향으로 쏠거다.
+
+                    for (int j = 0; j < 4; j++) // 그 20번을 4번(4방향으로) 쏠것이다.
+                    {
+                        float other = j * 90f; // j에 90도를 곱해주면 상하좌우 방향이 나오게 됨.
+                        for (int i = -1; i < 2; i++) // i가 -1,0,1에 대하여
+                        {
+                            float plusAngle = i * 15f + other; //15도씩 곱해줌으로서 -15도, 0도, +15도 -> 3갈래로 나가게 할것이다.
+
+                            Quaternion angleAxis = Quaternion.Euler(
+                                0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                                * Mathf.Rad2Deg + plusAngle + plusAngle2);
+
+                            if (!isDead)
+                            {
+                                Instantiate(attackProjectile_0, transform.position, angleAxis);
+                            }
+                        }
+                        yield return new WaitForSeconds(0.01f);
+                    }
+                    yield return new WaitForSeconds(0.2f);
+                }
+                break;
+
+            case 2: // 상하좌우 4방향으로 한줄기로 나가는 투사체를 각도를 더해주면서 발사
+                for (int i = 0; i < 60; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        float plusAngle = i * 10f + (j * 90); // i*10 ->다음 줄이 나갈 방향의 추가 각도, j*90 -> 방향
+
+                        Quaternion angleAxis = Quaternion.Euler(
+                        0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                        * Mathf.Rad2Deg + plusAngle);
+
+                        if (!isDead)
+                        {
+                            Instantiate(attackProjectile_0, transform.position, angleAxis);
+                        }
+                    }
+                    yield return new WaitForSeconds(0.15f);
+                }
+                break;
+
+            case 3: // 대규모 장판 공격
+                for (int j = 0; j < 5; j++) // 5번
+                {
+                    for (int i = 0; i < 20; i++) //25번
+                    {
+                        // 플레이어 현재 위치 기준
+                        // x 범위 얼마, y범위 얼마의 값을 랜덤으로 구해서
+                        // 해당 위치에 뿌림
+                        Vector3 Pos = TraceTarget.transform.position + new Vector3(Random.Range(-60, 60), Random.Range(-60, 60), 0);
+                        
+                        if (!isDead)
+                        {
+                            Instantiate(attackProjectile_1, Pos, Quaternion.identity);
+                        }
+
+                        yield return new WaitForSeconds(Random.Range(0.05f, 0.1f));
+                    }
+                    yield return new WaitForSeconds(0.05f);
+                }
+                break;
+
+
+            case 4:
+                for (int i = 1; i < 60; i++)
+                {
+                    if (i % 15 == 0)
+                    {
+                        for (int j = 0; j < 2; j++)
+                        {
+                            float plusRotate = j * 5f;
+                            for (int k = 0; k < 36; k++)
+                            {
+                                float plusAngle = k * 10f;
+                                float sum = plusAngle + plusRotate;
+
+                                Quaternion angleAxis = Quaternion.Euler(
+                                    0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                                    * Mathf.Rad2Deg + sum);
+
+                                if (!isDead)
+                                {
+                                    Instantiate(attackProjectile_0, transform.position, angleAxis);
+                                }
+                            }
+                            yield return new WaitForSeconds(0.15f);
+                        }
+                        yield return new WaitForSeconds(0.15f);
+                    }
+
+                    else
+                    {
+                        for (int j = 0; j < 4; j++)
+                        {
+                            float plusAngle = i * 10f + (j * 90); // i*10 ->다음 줄이 나갈 방향의 추가 각도, j*90 -> 방향
+
+                            Quaternion angleAxis = Quaternion.Euler(
+                            0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                            * Mathf.Rad2Deg + plusAngle);
+
+                            if (!isDead)
+                            {
+                                Instantiate(attackProjectile_0, transform.position, angleAxis);
+                            }
+                        }
+                        yield return new WaitForSeconds(0.15f);
+                    }
+                }
+                break;
+
+            case 5:
+                toPcVec = new Vector3
+                    (TraceTarget.transform.position.x - transform.position.x,
+                     TraceTarget.transform.position.y - transform.position.y,
+                     0);
+
+                int tilecount = 0;
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = -1; j < 2; j++)
+                    {
+                        float plusAngle = j * 20f;
+
+                        Quaternion angleAxis = Quaternion.Euler(
+                        0, 0, Mathf.Atan2(toPcVec.normalized.y, toPcVec.normalized.x)
+                        * Mathf.Rad2Deg + plusAngle);
+
+                        if (!isDead)
+                        {
+                            GameObject tile = Instantiate(attackProjectile_0, transform.position, angleAxis);
+                            TileList.Add(tile);
+                        }
+                        tilecount++; // -> 15가 될 것
+                    }
+                    yield return new WaitForSeconds(0.4f);
+                }
+                yield return new WaitForSeconds(1.0f);
+                
+                // 리스트에 담긴 객체들의 속도를 0으로
+                for (int j = 0; j < tilecount; j++)
+                {
+                    TileList[j].GetComponent<EnemyProjectile>().TileSpeed = 0;
+                }
+                yield return new WaitForSeconds(1.0f);
+                
+                //  리스트에 담긴 객체들에게 쫓을 타겟의 위치와 속도 전달
+                for (int k = 0; k < tilecount; k++)
+                {
+                    Debug.Log(tilecount);
+                    float tilespeed = TileList[k].GetComponent<EnemyProjectile>().BaseTileSpeed *= 1.8f;
+                    TileList[k].GetComponent<EnemyProjectile>().SetTarget(true, tilespeed);
+                    yield return new WaitForSeconds(0.1f);
+                }
+
+                //리스트에 있는 객체 정보를 삭제
+                TileList.Clear();
+                break;
+                
+            default:
+                break;
+        }
+        thisAnim.SetTrigger("Idle");
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(SpecialAttack_Boss());
     }
 
     void GiveExpToPlayer()
