@@ -169,6 +169,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 21421282027865528}
     m_Modifications:
+    - target: {fileID: 7806352362574222903, guid: b6124dcf12630c5419da17b69c43a8a5, type: 3}
+      propertyPath: m_Name
+      value: TempBuff
+      objectReference: {fileID: 0}
     - target: {fileID: 7806352363596416056, guid: b6124dcf12630c5419da17b69c43a8a5, type: 3}
       propertyPath: m_RootOrder
       value: 2
